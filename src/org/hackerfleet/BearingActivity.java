@@ -1,9 +1,10 @@
 package org.hackerfleet;
 
-import android.app.Activity;
+import com.actionbarsherlock.app.SherlockActivity;
+
 import android.os.Bundle;
 
-public class BearingActivity extends Activity {
+public class BearingActivity extends SherlockActivity {
   /**
    * Called when the activity is first created.
    */
@@ -11,5 +12,7 @@ public class BearingActivity extends Activity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate (savedInstanceState);
     setContentView (R.layout.main);
+
+    getSupportActionBar().setTitle("Corellian Engineering Corporation");
   }
 }
