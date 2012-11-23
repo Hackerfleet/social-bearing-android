@@ -10,7 +10,7 @@ public class BearingActivity extends Activity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate (savedInstanceState);
-    setContentView (R.layout.main);
+    setContentView (R.layout.buoy_select);
     getSupportActionBar().setTitle("Corellian Engineering Corporation");
   }
 }
