@@ -1,5 +1,7 @@
 package org.hackerfleet;
 
+import android.location.GpsSatellite;
+import android.location.GpsStatus;
 import org.hackerfleet.etc.AppDefs;
 import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.widget.Button;
@@ -8,15 +10,16 @@ import org.holoeverywhere.widget.TextView;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class MeasureStartActivity extends Activity implements LocationListener, View.OnClickListener {
+import java.util.Iterator;
+
+public class MeasureStartActivity extends Activity implements LocationListener, GpsStatus.Listener, View.OnClickListener {
 
   private Integer buoy;
-  private TextView sat_tv;
+  private TextView satellitesTextView, accuracyTextView;
   private ApplicationController ac;
   private Button startButton;
 
@@ -28,15 +31,19 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
     startButton = (Button) findViewById(R.id.start_btn);
 
     startButton.setOnClickListener(this);
+    ac.getLocationManager().addGpsStatusListener(this);
 
     buoy = getIntent().getExtras().getInt("buoy");
-    sat_tv = (TextView) findViewById(R.id.sat_count);
+    satellitesTextView = (TextView) findViewById(R.id.sat_count);
+    accuracyTextView = (TextView) findViewById(R.id.accuracy);
     if (ac.getLastLocation() == null)
-      sat_tv.setText("NO GPS");
+      satellitesTextView.setText("NO GPS");
     else
-      sat_tv.setText("" + ac.getLastLocation().getAccuracy() + "m");
+      accuracyTextView.setText(ac.getLastLocation().getAccuracy() + "m");
 
-    ac.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+    accuracyTextView = (TextView) findViewById(R.id.accuracy);
+
+    ac.addLocationListener(this);
 
     ImageView buoyIcon = (ImageView) findViewById(R.id.buoy_icon);
     buoyIcon.setImageResource(AppDefs.buoyDefinitions.get(buoy).image_resId);
@@ -44,8 +51,14 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
   }
 
   @Override
+  protected void onPause() {
+    super.onPause();
+    ac.disableLocationUpdates();
+  }
+
+  @Override
   public void onLocationChanged(Location location) {
-    sat_tv.setText("" + location.getAccuracy() + "m");
+    accuracyTextView.setText("" + location.getAccuracy() + "m");
 
   }
 
@@ -59,7 +72,7 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
 
   @Override
   public void onStatusChanged(String provider, int status, Bundle extras) {
-    sat_tv.setText("" + ac.getLastLocation().getAccuracy() + "m");
+    accuracyTextView.setText("" + ac.getLastLocation().getAccuracy() + "m");
   }
 
   @Override
@@ -68,4 +81,22 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
     startActivity(startSimpleForm);
   }
 
+  @Override
+  public void onGpsStatusChanged(final int event) {
+    switch (event) {
+      case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
+        GpsStatus status = ac.getLocationManager().getGpsStatus(null);
+        Iterator<GpsSatellite> satelliteIterator = status.getSatellites().iterator();
+        GpsSatellite satellite;
+        int i = 0;
+        while (satelliteIterator.hasNext() && (satellite = satelliteIterator.next()) != null) {
+          if (satellite.usedInFix()) i++;
+        }
+        if (i > 0)
+          satellitesTextView.setText(String.format("%d", i));
+        break;
+      default:
+        break;
+    }
+  }
 }
