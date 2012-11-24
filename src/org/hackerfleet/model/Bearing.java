@@ -15,19 +15,17 @@ public class Bearing implements Parcelable {
   private static final String BEARING = "bearing";
   private static final String ACCURACY = "accuracy";
 
-  private long timestamp;
   private Location location;
   private JSONObject json;
 
-  public Bearing(long timestamp, Location location) {
-    this.timestamp = timestamp;
+  public Bearing(Location location) {
     this.location = location;
   }
 
   public JSONObject toJSON() throws JSONException {
     if (json == null) {
       json = new JSONObject();
-      json.put(TIMESTAMP, timestamp);
+      json.put(TIMESTAMP, location.getTime());
       json.put(LAT, location.getLatitude());
       json.put(LON, location.getLongitude());
       json.put(BEARING, location.getBearing());
@@ -43,7 +41,6 @@ public class Bearing implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
-    dest.writeLong(timestamp);
     dest.writeParcelable(location, flags);
   }
 
@@ -59,7 +56,6 @@ public class Bearing implements Parcelable {
   };
 
   private Bearing(Parcel in) {
-    timestamp = in.readLong();
     location = in.readParcelable(ClassLoader.getSystemClassLoader());
   }
 }

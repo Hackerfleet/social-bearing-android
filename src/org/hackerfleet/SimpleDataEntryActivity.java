@@ -16,10 +16,13 @@ import org.hackerfleet.etc.AppDefs;
 import org.hackerfleet.etc.Network;
 import org.hackerfleet.model.Bearing;
 import org.hackerfleet.model.Buoy;
+import org.holoeverywhere.widget.Toast;
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * @author flashmop
@@ -28,7 +31,7 @@ import java.util.*;
 public class SimpleDataEntryActivity extends SherlockActivity implements Network.ResultListener {
   private final static String TAG = SimpleDataEntryActivity.class.getSimpleName();
 
-  private static final String EXTRA_BUOYS = "buoys";
+  private static final String EXTRA_BEARINGS = "bearings";
 
   private ApplicationController ac;
   LocationManager locationManager;
@@ -38,11 +41,13 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   EditText timestamp;
   EditText uuid;
   private Location lastLocation;
+  private ArrayList<Bearing> bearings;
 
-  public static void start(Context context, ArrayList<Buoy> buoys) {
+  public static void start(Context context, ArrayList<Bearing> bearings) {
     Intent start = new Intent(context,
         SimpleDataEntryActivity.class);
-    start.putParcelableArrayListExtra(EXTRA_BUOYS, buoys);
+    start.putParcelableArrayListExtra(EXTRA_BEARINGS, bearings);
+    context.startActivity(start);
   }
 
   @Override
@@ -50,7 +55,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     super.onCreate(savedInstanceState);
 
     ac = (ApplicationController) this.getApplicationContext();
-
+    bearings = new ArrayList<Bearing>();
     setContentView(R.layout.simple_data_entry);
     getSupportActionBar().setTitle("Corellian Engineering Corporation");
 
@@ -61,6 +66,11 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     acc = (EditText) findViewById(R.id.gps_acc);
     timestamp = (EditText) findViewById(R.id.timestamp);
     uuid = (EditText) findViewById(R.id.uuid);
+  }
+
+  @Override
+  protected void onNewIntent(Intent intent) {
+    bearings = intent.getParcelableArrayListExtra(EXTRA_BEARINGS);
   }
 
   @Override
@@ -93,33 +103,44 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_add:
-        break;
+        createAndAddBearing();
+        SimpleDataEntryActivity.start(this, bearings);
+        finish();
+        return true;
       case R.id.menu_done:
         try {
-          Bearing bearing
-              = new Bearing(System.currentTimeMillis(), lastLocation);
-          List<Bearing> bearings = new ArrayList<Bearing>();
-          bearings.add(bearing);
+          createAndAddBearing();
           Buoy buoy = new Buoy(AppDefs.buoyDefinitions.get(R.id.north_btn), null, bearings);
+          Log.d(AppDefs.TAG, buoy.toJSON().toString());
           Network.upload(this, buoy);
         } catch (IOException ioe) {
           Log.e(AppDefs.TAG, "Error while uploading", ioe);
         } catch (JSONException jsonE) {
           Log.e(AppDefs.TAG, "Error while uploading", jsonE);
         }
-        break;
+        return true;
+
+      default:
+        return super.onOptionsItemSelected(item);
     }
-    return super.onOptionsItemSelected(item);    //To change body of overridden methods use File | Settings | File Templates.
+
   }
 
 
   @Override
   public void onResponse(StatusLine statusLine) {
-    //To change body of implemented methods use File | Settings | File Templates.
+    //TODO define exit condtitions
+    Toast.makeText(this, "response: " + statusLine.getStatusCode(), Toast.LENGTH_SHORT).show();
   }
 
   @Override
   public void onResult(String result) {
     //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  private void createAndAddBearing() {
+    Bearing bearing
+        = new Bearing(lastLocation);
+    bearings.add(bearing);
   }
 }
