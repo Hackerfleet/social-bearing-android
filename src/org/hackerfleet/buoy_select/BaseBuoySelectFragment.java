@@ -5,7 +5,7 @@ import org.holoeverywhere.app.Fragment;
 import android.view.View;
 import android.widget.ImageButton;
 /**
- * a Base Fragment for Fragments that select Buoys
+ * a Base Fragment for Fragments that select Buoy
  * 
  * @author ligi
  *
@@ -20,7 +20,7 @@ public class BaseBuoySelectFragment extends Fragment{
 		
 		for (int resid: buoy_resids) {
 			ImageButton button=(ImageButton)container.findViewById(resid);
-			button.setTag((Integer)resid);
+			button.setTag(resid);
 			button.setOnClickListener(mOnBtnClickListener);
 		}
 	}
