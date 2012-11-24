@@ -113,7 +113,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     switch (item.getItemId()) {
       case R.id.menu_add:
         createAndAddBearing();
-        SimpleDataEntryActivity.start(this, bearings);
+//        SimpleDataEntryActivity.start(this, bearings);
         finish();
         return true;
       case R.id.menu_done:
