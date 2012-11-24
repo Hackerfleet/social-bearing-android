@@ -102,7 +102,8 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
 
   }
 
-  @Override protected void onStart() {
+  @Override
+  protected void onStart() {
     super.onStart();
 
     bearings = (ArrayList) getIntent().getParcelableArrayListExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS);
