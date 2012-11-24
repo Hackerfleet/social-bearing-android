@@ -15,8 +15,7 @@ public class BearingActivity extends Activity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.buoy_select);
-    getSupportActionBar().setTitle("BearingActivity");
-
+    getSupportActionBar().setTitle(R.string.buoy_select);
   }
 
   @Override
