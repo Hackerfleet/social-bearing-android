@@ -14,11 +14,14 @@ public class BaseBuoySelectFragment extends Fragment{
 
 	private BuoySelectOnClickListener mOnBtnClickListener;
 		
-	public void btn2buoy(View container,int buoy_resid,String tag) {
+	public void btn2buoy(View container,int[] buoy_resids) {
 		if (mOnBtnClickListener==null)
 			mOnBtnClickListener=new BuoySelectOnClickListener();
 		
-		ImageButton button=(ImageButton)container.findViewById(buoy_resid);
-		button.setOnClickListener(mOnBtnClickListener);
+		for (int resid: buoy_resids) {
+			ImageButton button=(ImageButton)container.findViewById(resid);
+			button.setTag((Integer)resid);
+			button.setOnClickListener(mOnBtnClickListener);
+		}
 	}
 }

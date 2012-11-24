@@ -12,12 +12,12 @@ public class BuoySelectOnClickListener implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-		if (v.getTag() instanceof String) {
+		if (!(v.getTag() instanceof Integer)) {
 			Log.w(AppDefs.TAG," Tag no string - dunno what Buoy");
 			return;
 		}
 		Intent start_intent=new Intent(v.getContext(),MeasureStartActivity.class);
-		start_intent.putExtra("buoy", (String)v.getTag());
+		start_intent.putExtra("buoy",(Integer)v.getTag());
 		v.getContext().startActivity(start_intent);
 	}
 
