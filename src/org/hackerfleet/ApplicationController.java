@@ -15,13 +15,17 @@ import java.util.UUID;
 public class ApplicationController extends Application implements LocationListener {
 
   private static final String PREFS_KEY_UUID = "uuid";
-  private Location last_loc;
-  private LocationManager mLocationManager;
+  private Location               last_loc;
+  private LocationManager        mLocationManager;
   private List<LocationListener> externalListeners;
-  private UUID uuid;
+  private UUID                   uuid;
+  private static ApplicationController  instance;
 
   @Override
   public void onCreate() {
+
+    instance = this;
+
     mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
     enableLocationUpdates();
     externalListeners = new ArrayList<LocationListener>();
@@ -96,5 +100,9 @@ public class ApplicationController extends Application implements LocationListen
 
   public UUID getUuid() {
     return uuid;
+  }
+
+  public static ApplicationController getInstance() {
+    return instance;
   }
 }

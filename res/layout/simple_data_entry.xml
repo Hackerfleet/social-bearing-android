@@ -14,44 +14,57 @@
         android:id="@+id/gps_lat"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:hint="Latitude"/>
+        android:hint="Latitude"
+        android:editable="false" />
 
-    <EditText
-        android:id="@+id/gps_lon"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:hint="Longitude"/>
-    <EditText
-        android:id="@+id/gps_acc"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:hint="Accuracy"/>
+      <EditText
+          android:id="@+id/gps_lon"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:hint="Longitude"
+          android:editable="false" />
+
+      <EditText
+          android:id="@+id/gps_acc"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:hint="Accuracy"
+          android:editable="false" />
   </LinearLayout>
 
   <EditText
       android:id="@+id/timestamp"
       android:layout_height="wrap_content"
       android:layout_width="fill_parent"
-      android:hint="Timestamp"/>
+      android:hint="Timestamp"
+      android:editable="false" />
 
-  <EditText
-      android:id="@+id/angle"
-      android:layout_height="wrap_content"
-      android:layout_width="fill_parent"
-      android:hint="Angle"
-      android:inputType="numberDecimal"/>
+    <EditText
+        android:id="@+id/angle"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:hint="Angle"
+        android:inputType="numberDecimal"
+        android:editable="true"
+        android:focusable="true">
 
-  <EditText
-      android:id="@+id/boje_type"
-      android:layout_height="wrap_content"
-      android:layout_width="fill_parent"
-      android:hint="Bouy Type"/>
+        <requestFocus />
 
-  <EditText
-      android:id="@+id/uuid"
-      android:layout_height="wrap_content"
-      android:layout_width="fill_parent"
-      android:hint="UUID"/>
+    </EditText>
+
+    <EditText
+        android:id="@+id/boje_type"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:hint="Bouy Type"
+        android:editable="false" />
+
+    <EditText
+        android:id="@+id/uuid"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:hint="UUID"
+        android:editable="false" />
 
 </LinearLayout>
 

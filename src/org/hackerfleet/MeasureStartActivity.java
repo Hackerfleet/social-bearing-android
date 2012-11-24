@@ -1,26 +1,34 @@
 package org.hackerfleet;
 
-import android.app.Activity;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.hackerfleet.etc.AppDefs;
+import org.hackerfleet.model.Bearing;
+import org.holoeverywhere.app.Activity;
+
 import android.content.Intent;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import org.hackerfleet.etc.AppDefs;
-
-import java.util.Iterator;
 
 public class MeasureStartActivity extends Activity implements LocationListener, GpsStatus.Listener, View.OnClickListener {
 
+  private static final int    REQUEST_BEARINGS   = 1337;
+  public static final  String EXTRA_KEY_BEARINGS = "bearings";
+  private static final String TAG                = MeasureStartActivity.class.getSimpleName();
   private Integer buoy;
   private TextView satellitesTextView, accuracyTextView;
   private ApplicationController ac;
-  private Button startButton;
+  private Button             startButton;
+  private ArrayList<Bearing> bearings;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,7 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
     ImageView buoyIcon = (ImageView) findViewById(R.id.buoy_icon);
     buoyIcon.setImageResource(AppDefs.buoyDefinitions.get(buoy).image_resId);
     super.onCreate(savedInstanceState);
+
   }
 
   @Override
@@ -77,7 +86,25 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
   @Override
   public void onClick(View view) {
     Intent startSimpleForm = new Intent(MeasureStartActivity.this, SimpleDataEntryActivity.class);
-    startActivity(startSimpleForm);
+
+    startSimpleForm.putExtra(EXTRA_KEY_BEARINGS, bearings);
+
+    startActivityForResult(startSimpleForm, REQUEST_BEARINGS);
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    if (requestCode == REQUEST_BEARINGS) {
+      if (resultCode == RESULT_OK) {
+
+        bearings = (ArrayList) data.getParcelableArrayListExtra(EXTRA_KEY_BEARINGS);
+
+        Log.d(TAG, "bearings: " + bearings);
+      }
+    }
+
   }
 
   @Override

@@ -1,16 +1,10 @@
 package org.hackerfleet;
 
-import android.content.Context;
-import android.content.Intent;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.EditText;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
 import org.apache.http.StatusLine;
 import org.hackerfleet.etc.AppDefs;
 import org.hackerfleet.etc.Network;
@@ -19,10 +13,19 @@ import org.hackerfleet.model.Buoy;
 import org.holoeverywhere.widget.Toast;
 import org.json.JSONException;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
+import android.content.Context;
+import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.WindowManager;
+import android.widget.EditText;
 
 /**
  * @author flashmop
@@ -40,6 +43,8 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   EditText acc;
   EditText timestamp;
   EditText uuid;
+  EditText angle;
+
   private Location lastLocation;
   private ArrayList<Bearing> bearings;
 
@@ -65,6 +70,11 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     lon = (EditText) findViewById(R.id.gps_lon);
     acc = (EditText) findViewById(R.id.gps_acc);
     timestamp = (EditText) findViewById(R.id.timestamp);
+    angle = (EditText) findViewById(R.id.angle);
+    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+//    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//    imm.showSoftInput(angle, InputMethodManager.SHOW_IMPLICIT);
+
     uuid = (EditText) findViewById(R.id.uuid);
   }
 
@@ -93,6 +103,16 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   }
 
   @Override
+  protected void onStart() {
+    super.onStart();
+
+    bearings = (ArrayList) getIntent().getParcelableArrayListExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS);
+    if (bearings == null) {
+      bearings = new ArrayList<Bearing>();
+    }
+  }
+
+  @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater inflater = this.getSupportMenuInflater();
     inflater.inflate(R.menu.measure_menu, menu);
@@ -104,20 +124,32 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     switch (item.getItemId()) {
       case R.id.menu_add:
         createAndAddBearing();
-        SimpleDataEntryActivity.start(this, bearings);
+        Toast.makeText(this, "Bearing added", Toast.LENGTH_SHORT).show();
+//        SimpleDataEntryActivity.start(this, bearings);
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS, bearings);
+
+        setResult(MeasureStartActivity.RESULT_OK, resultIntent);
         finish();
         return true;
       case R.id.menu_done:
         try {
           createAndAddBearing();
+          Toast.makeText(this, bearings.size() + " Bearings send.", Toast.LENGTH_SHORT).show();
+
           Buoy buoy = new Buoy(AppDefs.buoyDefinitions.get(R.id.north_btn), null, bearings);
           Log.d(AppDefs.TAG, buoy.toJSON().toString());
           Network.upload(this, buoy);
+
         } catch (IOException ioe) {
+
           Log.e(AppDefs.TAG, "Error while uploading", ioe);
         } catch (JSONException jsonE) {
+
           Log.e(AppDefs.TAG, "Error while uploading", jsonE);
         }
+        finish(); //?
+
         return true;
 
       default:
