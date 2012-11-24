@@ -1,8 +1,10 @@
 package org.hackerfleet;
 
+import java.util.Date;
+import java.util.Locale;
+
 import com.actionbarsherlock.app.SherlockActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
@@ -21,6 +23,7 @@ public class SimpleDataEntryActivity extends SherlockActivity {
   EditText        lat;
   EditText        lon;
   EditText        acc;
+  EditText timestamp;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class SimpleDataEntryActivity extends SherlockActivity {
     lat = (EditText) findViewById(R.id.gps_lat);
     lon = (EditText) findViewById(R.id.gps_lon);
     acc = (EditText) findViewById(R.id.gps_acc);
+    timestamp = (EditText) findViewById(R.id.timestamp);
+
 
   }
 
@@ -40,13 +45,17 @@ public class SimpleDataEntryActivity extends SherlockActivity {
   public void onResume() {
     super.onResume();
 
-    Location lastLocation = locationManager.getLastKnownLocation("GPS");
+    Location lastLocation = getIntent().getExtras().getParcelable(MeasureStartActivity.EXTRAS_KEY_LOCATION);
+
     Log.d(TAG, "lastLocation: " + lastLocation);
 
     if (lastLocation != null) {
-      lat.setText("" + lastLocation.getLatitude());
-      lon.setText("" + lastLocation.getLongitude());
-      acc.setText("" + lastLocation.getAccuracy());
+
+      lat.setText("" + String.format(Locale.getDefault(), "%.4f", lastLocation.getLatitude()));
+      lon.setText("" + String.format(Locale.getDefault(), "%.4f", lastLocation.getLongitude()));
+      acc.setText(String.format(Locale.getDefault(), "%.1f", lastLocation.getAccuracy()) + "m");
+      Date locationDate = new Date(lastLocation.getTime());
+      timestamp.setText(locationDate.getHours() + ":" + locationDate.getMinutes() + ":" + locationDate.getSeconds());
     }
 
   }

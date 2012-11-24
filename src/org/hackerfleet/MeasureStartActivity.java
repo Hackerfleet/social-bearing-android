@@ -20,6 +20,13 @@ public class MeasureStartActivity extends Activity implements LocationListener {
   private ApplicationController ac;
   private Button                startButton;
 
+  public final static String EXTRAS_KEY_LOCATION = "location";
+//  public final static String EXTRAS_KEY_LAT = "latitude";
+//  public final static String EXTRAS_KEY_LON = "longitude";
+//  public final static String EXTRAS_KEY_ACC = "accuracy";
+
+  private Location location;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.measure_start);
@@ -30,6 +37,7 @@ public class MeasureStartActivity extends Activity implements LocationListener {
     startButton.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
         Intent startSimpleForm = new Intent(MeasureStartActivity.this, SimpleDataEntryActivity.class);
+        startSimpleForm.putExtra(EXTRAS_KEY_LOCATION, location);
         startActivity(startSimpleForm);
       }
     });
@@ -51,8 +59,8 @@ public class MeasureStartActivity extends Activity implements LocationListener {
 	@Override
 	public void onLocationChanged(Location location) {
 		sat_tv.setText(""+location.getAccuracy()+"m");
-
-	}
+    this.location = location;
+  }
 
 	@Override
 	public void onProviderDisabled(String provider) {
