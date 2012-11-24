@@ -18,7 +18,7 @@
             android:layout_weight="1"/>
 
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/north_btn"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
@@ -39,7 +39,7 @@
         android:layout_weight="1" >
 
         <ImageButton
-            android:id="@+id/button3"
+            android:id="@+id/west_btn"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
@@ -47,7 +47,7 @@
             android:src="@drawable/spar_west" />
 
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/center_btn"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
@@ -55,7 +55,7 @@
             android:src="@drawable/pillar_single" />
 
         <ImageButton
-            android:id="@+id/button1"
+            android:id="@+id/east_btn"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
@@ -70,14 +70,12 @@
         android:layout_weight="1">
 
         <View
-            android:id="@+id/button3"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:text="Button" />
+            android:layout_weight="1" />
 
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/south_btn"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
@@ -85,7 +83,6 @@
             android:src="@drawable/spar_south" />
 
         <View
-            android:id="@+id/button1"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"/>
