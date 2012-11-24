@@ -1,6 +1,9 @@
 package org.hackerfleet;
 
+import java.util.UUID;
+
 import org.holoeverywhere.app.Application;
+import org.holoeverywhere.preference.SharedPreferences;
 
 import android.content.Context;
 import android.location.Location;
@@ -10,23 +13,42 @@ import android.os.Bundle;
 
 public class ApplicationController extends Application implements LocationListener{
 
-	private Location last_loc;
-	private LocationManager mLocationManager;
-	
-	@Override
-	public void onCreate() {
-		mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+  public static final String PREFS_KEY_UUID = "uuid";
+  private Location        last_loc;
+  private LocationManager mLocationManager;
+  private UUID            uuid;
 
-		mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-		
-		super.onCreate();
-	}
+  @Override
+  public void onCreate() {
+    mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
-	public Location getLastLocation() {
-		return last_loc;
-	}
+    mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
-	public LocationManager getLocationManager() {
+    super.onCreate();
+
+    final SharedPreferences sharedPreferences = getSharedPreferences(ApplicationController.class.getSimpleName(), Context.MODE_PRIVATE);
+    String uuidString = sharedPreferences.getString(PREFS_KEY_UUID, null);
+
+    if (uuidString != null) {
+      uuid = UUID.fromString(uuidString);
+    } else {
+
+      uuid = UUID.randomUUID();
+      SharedPreferences.Editor editor = sharedPreferences.edit();
+
+      editor.putString(PREFS_KEY_UUID, uuid.toString());
+
+      editor.commit();
+
+    }
+
+  }
+
+  public Location getLastLocation() {
+    return last_loc;
+  }
+
+  public LocationManager getLocationManager() {
 		return mLocationManager;
 	}
 
@@ -39,4 +61,14 @@ public class ApplicationController extends Application implements LocationListen
   public void onProviderEnabled(String provider) {}
 
   public void onProviderDisabled(String provider) {}
+
+
+  public UUID getUuid() {
+    return uuid;
+  }
+
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
+  }
+
 }
