@@ -40,7 +40,7 @@ public class SimpleDataEntryActivity extends SherlockActivity {
   public void onResume() {
     super.onResume();
 
-    Location lastLocation = locationManager.getLastKnownLocation("GPS");
+    Location lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
     Log.d(TAG, "lastLocation: " + lastLocation);
 
     if (lastLocation != null) {

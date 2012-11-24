@@ -12,7 +12,7 @@ import android.util.SparseArray;
 public class AppDefs {
 	public final static String TAG="SOCIALBEARING";
 	
-	public final static SparseArray<BuoyDefinition> foo=new SparseArray<BuoyDefinition>() {{
+	public final static SparseArray<BuoyDefinition> buoyDefinitions = new SparseArray<BuoyDefinition>() {{
 		put(R.id.north_btn,new BuoyDefinition(R.drawable.spar_north,"north"));
 		put(R.id.south_btn,new BuoyDefinition(R.drawable.spar_south,"south"));
 		put(R.id.east_btn,new BuoyDefinition(R.drawable.spar_east,"east"));
