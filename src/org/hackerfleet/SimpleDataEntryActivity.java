@@ -1,14 +1,16 @@
 package org.hackerfleet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import org.apache.http.StatusLine;
 import org.hackerfleet.etc.AppDefs;
 import org.hackerfleet.etc.Network;
@@ -17,17 +19,16 @@ import org.hackerfleet.model.Buoy;
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * @author flashmop
  * @date 24.11.12 09:49
  */
-public class SimpleDataEntryActivity extends SherlockActivity implements View.OnClickListener, Network.ResultListener {
+public class SimpleDataEntryActivity extends SherlockActivity implements Network.ResultListener {
   private final static String TAG = SimpleDataEntryActivity.class.getSimpleName();
+
+  private static final String EXTRA_BUOYS = "buoys";
 
   private ApplicationController ac;
   LocationManager locationManager;
@@ -36,8 +37,13 @@ public class SimpleDataEntryActivity extends SherlockActivity implements View.On
   EditText acc;
   EditText timestamp;
   EditText uuid;
-  Button upload;
   private Location lastLocation;
+
+  public static void start(Context context, ArrayList<Buoy> buoys) {
+    Intent start = new Intent(context,
+        SimpleDataEntryActivity.class);
+    start.putParcelableArrayListExtra(EXTRA_BUOYS, buoys);
+  }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -55,8 +61,6 @@ public class SimpleDataEntryActivity extends SherlockActivity implements View.On
     acc = (EditText) findViewById(R.id.gps_acc);
     timestamp = (EditText) findViewById(R.id.timestamp);
     uuid = (EditText) findViewById(R.id.uuid);
-    upload = (Button) findViewById(R.id.button_send);
-    upload.setOnClickListener(this);
   }
 
   @Override
@@ -79,9 +83,18 @@ public class SimpleDataEntryActivity extends SherlockActivity implements View.On
   }
 
   @Override
-  public void onClick(View v) {
-    switch (v.getId()) {
-      case R.id.button_send:
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = this.getSupportMenuInflater();
+    inflater.inflate(R.menu.measure_menu, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menu_add:
+        break;
+      case R.id.menu_done:
         try {
           Bearing bearing
               = new Bearing(System.currentTimeMillis(), lastLocation);
@@ -95,10 +108,10 @@ public class SimpleDataEntryActivity extends SherlockActivity implements View.On
           Log.e(AppDefs.TAG, "Error while uploading", jsonE);
         }
         break;
-      default:
-        break;
     }
+    return super.onOptionsItemSelected(item);    //To change body of overridden methods use File | Settings | File Templates.
   }
+
 
   @Override
   public void onResponse(StatusLine statusLine) {

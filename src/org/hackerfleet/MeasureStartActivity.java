@@ -1,18 +1,17 @@
 package org.hackerfleet;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
-import org.hackerfleet.etc.AppDefs;
-import org.holoeverywhere.app.Activity;
-import org.holoeverywhere.widget.Button;
-import org.holoeverywhere.widget.TextView;
-
-import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import org.hackerfleet.etc.AppDefs;
 
 import java.util.Iterator;
 
