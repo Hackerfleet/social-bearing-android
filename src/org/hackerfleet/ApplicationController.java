@@ -6,22 +6,41 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import org.holoeverywhere.app.Application;
+import org.holoeverywhere.preference.SharedPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ApplicationController extends Application implements LocationListener {
 
+  private static final String PREFS_KEY_UUID = "uuid";
   private Location last_loc;
   private LocationManager mLocationManager;
   private List<LocationListener> externalListeners;
+  private UUID uuid;
 
   @Override
   public void onCreate() {
     mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
     enableLocationUpdates();
     externalListeners = new ArrayList<LocationListener>();
-    super.onCreate();
+
+    final SharedPreferences sharedPreferences = getSharedPreferences(ApplicationController.class.getSimpleName(), Context.MODE_PRIVATE);
+    String uuidString = sharedPreferences.getString(PREFS_KEY_UUID, null);
+
+    if (uuidString != null) {
+      uuid = UUID.fromString(uuidString);
+    } else {
+
+      uuid = UUID.randomUUID();
+      SharedPreferences.Editor editor = sharedPreferences.edit();
+
+      editor.putString(PREFS_KEY_UUID, uuid.toString());
+
+      editor.commit();
+      super.onCreate();
+    }
   }
 
   public Location getLastLocation() {
@@ -69,5 +88,13 @@ public class ApplicationController extends Application implements LocationListen
   public void onProviderDisabled(String provider) {
     for (LocationListener listener : externalListeners)
       listener.onProviderDisabled(provider);
+  }
+
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
+  }
+
+  public UUID getUuid() {
+    return uuid;
   }
 }

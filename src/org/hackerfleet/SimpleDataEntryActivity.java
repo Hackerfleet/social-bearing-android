@@ -1,8 +1,10 @@
 package org.hackerfleet;
 
+import java.util.Date;
+import java.util.Locale;
+
 import com.actionbarsherlock.app.SherlockActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
@@ -17,14 +19,20 @@ import android.widget.EditText;
 public class SimpleDataEntryActivity extends SherlockActivity {
   private final static String TAG = SimpleDataEntryActivity.class.getSimpleName();
 
+  private ApplicationController ac;
   LocationManager locationManager;
   EditText        lat;
   EditText        lon;
   EditText        acc;
+  EditText timestamp;
+  EditText uuid;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    ac = (ApplicationController) this.getApplicationContext();
+
     setContentView(R.layout.simple_data_entry);
     getSupportActionBar().setTitle("Corellian Engineering Corporation");
 
@@ -33,6 +41,9 @@ public class SimpleDataEntryActivity extends SherlockActivity {
     lat = (EditText) findViewById(R.id.gps_lat);
     lon = (EditText) findViewById(R.id.gps_lon);
     acc = (EditText) findViewById(R.id.gps_acc);
+    timestamp = (EditText) findViewById(R.id.timestamp);
+    uuid = (EditText) findViewById(R.id.uuid);
+
 
   }
 
@@ -44,9 +55,13 @@ public class SimpleDataEntryActivity extends SherlockActivity {
     Log.d(TAG, "lastLocation: " + lastLocation);
 
     if (lastLocation != null) {
-      lat.setText("" + lastLocation.getLatitude());
-      lon.setText("" + lastLocation.getLongitude());
-      acc.setText("" + lastLocation.getAccuracy());
+
+      lat.setText("" + String.format(Locale.getDefault(), "%.4f", lastLocation.getLatitude()));
+      lon.setText("" + String.format(Locale.getDefault(), "%.4f", lastLocation.getLongitude()));
+      acc.setText(String.format(Locale.getDefault(), "%.1f", lastLocation.getAccuracy()) + "m");
+      Date locationDate = new Date(lastLocation.getTime());
+      timestamp.setText(locationDate.getHours() + ":" + locationDate.getMinutes() + ":" + locationDate.getSeconds());
+      uuid.setText(ac.getUuid().toString());
     }
 
   }
