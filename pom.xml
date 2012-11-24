@@ -45,6 +45,7 @@
             <groupId>org.holoeverywhere</groupId>
             <artifactId>library</artifactId>
             <version>${holoeverywhere.version}</version>
+            <type>apklib</type>
             <!--<exclusions>-->
                 <!--<exclusion>-->
                     <!--<groupId>com.actionbarsherlock</groupId>-->
@@ -162,7 +163,7 @@
                     <!--<androidManifestFile>${project.build.directory}/filtered-manifest/AndroidManifest.xml-->
                     <!--</androidManifestFile>-->
                     <sdk>
-                        <platform>15</platform>
+                        <platform>17</platform>
                     </sdk>
                 </configuration>
 
