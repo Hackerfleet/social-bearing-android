@@ -1,16 +1,11 @@
 package org.hackerfleet;
-
 import org.holoeverywhere.app.Activity;
 
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 
 public class BearingActivity extends Activity {
-  private static final String TAG = BearingActivity.class.getSimpleName();
   /**
    * Called when the activity is first created.
    */
@@ -22,9 +17,8 @@ public class BearingActivity extends Activity {
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.main);
-
+    super.onCreate (savedInstanceState);
+    setContentView (R.layout.buoy_select);
     getSupportActionBar().setTitle("Corellian Engineering Corporation");
 
     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
