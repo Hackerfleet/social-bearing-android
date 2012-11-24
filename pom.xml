@@ -8,12 +8,12 @@
     <packaging>apk</packaging>
     <name>SocialBearing - Application</name>
     <scm>
-        <developerConnection>scm:git:git@github.com:biafra23/AmDroid.git</developerConnection>
+        <developerConnection>scm:git:git@192.168.2.239:socialbearing/android.git</developerConnection>
     </scm>
     <properties>
-        <actionbarsherlock.version>4.1.0</actionbarsherlock.version>
+        <actionbarsherlock.version>4.2.0</actionbarsherlock.version>
         <compatibility-v4.version>r7</compatibility-v4.version>
-        <holoeverywhere.version>1.0.0</holoeverywhere.version>
+        <holoeverywhere.version>1.4.0</holoeverywhere.version>
         <android-jar.version>4.1.1.4</android-jar.version>
         <!--<qypeRepositoryUrl>http://nexus.qype.com/content/repositories</qypeRepositoryUrl>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,10 +42,15 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.wazabe.holoeverywhere</groupId>
+            <groupId>org.holoeverywhere</groupId>
             <artifactId>library</artifactId>
-            <type>apklib</type>
             <version>${holoeverywhere.version}</version>
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>com.actionbarsherlock</groupId>-->
+                    <!--<artifactId>actionbarsherlock</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
         </dependency>
 
         <dependency>
@@ -53,19 +58,18 @@
             <artifactId>support-v4</artifactId>
             <version>${compatibility-v4.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.actionbarsherlock</groupId>
-            <artifactId>library</artifactId>
+            <artifactId>actionbarsherlock</artifactId>
             <version>${actionbarsherlock.version}</version>
             <type>apklib</type>
-
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.android</groupId>
-                    <artifactId>support-v4</artifactId>
-                </exclusion>
-            </exclusions>
-
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>com.google.android</groupId>-->
+                    <!--<artifactId>support-v4</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
         </dependency>
     </dependencies>
     <build>
@@ -390,6 +394,7 @@
             <url>${qypeRepositoryUrl}/releases</url>
         </repository>
     </distributionManagement>
+
     <repositories>
         <repository>
             <id>qype-snapshots-repository</id>
@@ -410,6 +415,12 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+        </repository>
+
+        <repository>
+            <id>holoeverywhere-repo</id>
+            <name>HoloEverywhere Repo</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </repositories>
 </project>
