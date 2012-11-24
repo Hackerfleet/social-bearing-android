@@ -13,12 +13,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class MeasureStartActivity extends Activity implements LocationListener {
+public class MeasureStartActivity extends Activity implements LocationListener, View.OnClickListener {
 
-  private Integer               buoy;
-  private TextView              sat_tv;
+  private Integer buoy;
+  private TextView sat_tv;
   private ApplicationController ac;
-  private Button                startButton;
+  private Button startButton;
 
   public final static String EXTRAS_KEY_LOCATION = "location";
 //  public final static String EXTRAS_KEY_LAT = "latitude";
@@ -34,46 +34,45 @@ public class MeasureStartActivity extends Activity implements LocationListener {
 
     startButton = (Button) findViewById(R.id.start_btn);
 
-    startButton.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View view) {
-        Intent startSimpleForm = new Intent(MeasureStartActivity.this, SimpleDataEntryActivity.class);
-        startSimpleForm.putExtra(EXTRAS_KEY_LOCATION, location);
-        startActivity(startSimpleForm);
-      }
-    });
+    startButton.setOnClickListener(this);
 
     buoy = getIntent().getExtras().getInt("buoy");
     sat_tv = (TextView) findViewById(R.id.sat_count);
     if (ac.getLastLocation() == null)
       sat_tv.setText("NO GPS");
     else
-      sat_tv.setText(""+ac.getLastLocation().getAccuracy()+"m");
-		
-		ac.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-		
-		ImageView bouy_icon=(ImageView)findViewById(R.id.buoy_icon);
-		bouy_icon.setImageResource(AppDefs.foo.get(buoy).image_resId);
-		super.onCreate(savedInstanceState);
-	}
+      sat_tv.setText("" + ac.getLastLocation().getAccuracy() + "m");
 
-	@Override
-	public void onLocationChanged(Location location) {
-		sat_tv.setText(""+location.getAccuracy()+"m");
-    this.location = location;
+    ac.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+
+    ImageView buoyIcon = (ImageView) findViewById(R.id.buoy_icon);
+    buoyIcon.setImageResource(AppDefs.buoyDefinitions.get(buoy).image_resId);
+    super.onCreate(savedInstanceState);
   }
 
-	@Override
-	public void onProviderDisabled(String provider) {
-	}
+  @Override
+  public void onLocationChanged(Location location) {
+    sat_tv.setText("" + location.getAccuracy() + "m");
 
-	@Override
-	public void onProviderEnabled(String provider) {
-	}
+  }
 
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		sat_tv.setText(""+ac.getLastLocation().getAccuracy()+"m");
+  @Override
+  public void onProviderDisabled(String provider) {
+  }
 
-	}
+  @Override
+  public void onProviderEnabled(String provider) {
+  }
+
+  @Override
+  public void onStatusChanged(String provider, int status, Bundle extras) {
+    sat_tv.setText("" + ac.getLastLocation().getAccuracy() + "m");
+  }
+
+  @Override
+  public void onClick(View view) {
+    Intent startSimpleForm = new Intent(MeasureStartActivity.this, SimpleDataEntryActivity.class);
+    startActivity(startSimpleForm);
+  }
 
 }

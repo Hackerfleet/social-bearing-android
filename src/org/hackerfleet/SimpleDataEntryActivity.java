@@ -45,8 +45,7 @@ public class SimpleDataEntryActivity extends SherlockActivity {
   public void onResume() {
     super.onResume();
 
-    Location lastLocation = getIntent().getExtras().getParcelable(MeasureStartActivity.EXTRAS_KEY_LOCATION);
-
+    Location lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
     Log.d(TAG, "lastLocation: " + lastLocation);
 
     if (lastLocation != null) {
