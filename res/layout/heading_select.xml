@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    
+    android:padding="7dp"
     android:columnCount="4"
     android:orientation="vertical" >
 
@@ -22,6 +22,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:background="@drawable/button"
             android:scaleType="fitCenter"
             android:src="@drawable/spar_north" />
 
@@ -44,6 +45,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
+            android:background="@drawable/button"
             android:src="@drawable/spar_west" />
 
         <ImageButton
@@ -52,6 +54,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
+            android:background="@drawable/button"
             android:src="@drawable/pillar_single" />
 
         <ImageButton
@@ -60,6 +63,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
+            android:background="@drawable/button"
             android:src="@drawable/spar_east" />
 
     </LinearLayout>
@@ -80,6 +84,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
+            android:background="@drawable/button"
             android:src="@drawable/spar_south" />
 
         <View
