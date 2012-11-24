@@ -4,7 +4,7 @@ import org.hackerfleet.R;
 
 import android.util.SparseArray;
 /**
- * Application Definitions
+ * Application Definitions / xonfig
  * 
  * @author ligi
  *

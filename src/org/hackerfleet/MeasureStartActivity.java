@@ -14,10 +14,14 @@ public class MeasureStartActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView (R.layout.measure_start);
+		ApplicationController ac=(ApplicationController)this.getApplicationContext();
 		
 		buoy=getIntent().getExtras().getInt("buoy");
 		TextView sat_tv=(TextView)findViewById(R.id.sat_count);
-		sat_tv.setText(buoy);
+		if (ac.getLastLocation()==null)
+			sat_tv.setText("NO GPS");
+		else
+			sat_tv.setText(""+ac.getLastLocation().getAccuracy()+"m");
 		
 		ImageView bouy_icon=(ImageView)findViewById(R.id.buoy_icon);
 		bouy_icon.setImageResource(AppDefs.foo.get(buoy).image_resId);
