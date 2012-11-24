@@ -6,6 +6,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -40,6 +42,8 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   EditText acc;
   EditText timestamp;
   EditText uuid;
+  EditText angle;
+
   private Location lastLocation;
   private ArrayList<Bearing> bearings;
 
@@ -65,6 +69,11 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     lon = (EditText) findViewById(R.id.gps_lon);
     acc = (EditText) findViewById(R.id.gps_acc);
     timestamp = (EditText) findViewById(R.id.timestamp);
+    angle = (EditText) findViewById(R.id.angle);
+    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+//    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//    imm.showSoftInput(angle, InputMethodManager.SHOW_IMPLICIT);
+
     uuid = (EditText) findViewById(R.id.uuid);
   }
 
