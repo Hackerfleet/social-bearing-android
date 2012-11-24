@@ -1,5 +1,6 @@
 package org.hackerfleet.buoy_select;
 
+import org.hackerfleet.etc.AppDefs;
 import org.holoeverywhere.app.Fragment;
 
 import android.view.View;
@@ -20,6 +21,7 @@ public class BaseBuoySelectFragment extends Fragment{
 		
 		for (int resid: buoy_resids) {
 			ImageButton button=(ImageButton)container.findViewById(resid);
+			button.setImageResource(AppDefs.buoyDefinitions.get(resid).image_resId);
 			button.setTag(resid);
 			button.setOnClickListener(mOnBtnClickListener);
 		}

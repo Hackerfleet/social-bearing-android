@@ -22,22 +22,22 @@
          />
 
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/specialpp_forbidden"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:background="@drawable/button"
-            android:src="@drawable/pillar_single" />
+          />
 
         <ImageButton
-            android:id="@+id/button1"
+            android:id="@+id/specialpp_safe_water"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:background="@drawable/button"
-            android:src="@drawable/spar_east" />
+          />
 
     </LinearLayout>
     
@@ -47,32 +47,32 @@
         android:layout_weight="1" >
 
         <ImageButton
-            android:id="@+id/button3"
+            android:id="@+id/specialpp_fateral"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:background="@drawable/button"
-            android:src="@drawable/spar_west" />
+          />
         
 
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/specialpp_lateral"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:background="@drawable/button"
-            android:src="@drawable/pillar_single" />
+          />
 
         <ImageButton
-            android:id="@+id/button1"
+            android:id="@+id/specialpp_prefered_starbord"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:background="@drawable/button"
-            android:src="@drawable/spar_east" />
+          />
 
     </LinearLayout>
     

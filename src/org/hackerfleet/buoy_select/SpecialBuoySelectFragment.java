@@ -2,18 +2,18 @@ package org.hackerfleet.buoy_select;
 
 import org.hackerfleet.R;
 import org.holoeverywhere.LayoutInflater;
-import org.holoeverywhere.app.Fragment;
 
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SpecialBuoySelectFragment extends Fragment {
+public class SpecialBuoySelectFragment extends BaseBuoySelectFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.special_select);
+		View v=inflater.inflate(R.layout.special_select);
+		btn2buoy(v,new int[] {R.id.specialpp_conical,R.id.specialpp_fateral,R.id.specialpp_forbidden,R.id.specialpp_lateral});
+		return v;
 	}
-
 }

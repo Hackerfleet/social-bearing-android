@@ -45,7 +45,7 @@
 
     </RelativeLayout>
 
-    <Button
+    <org.hackerfleet.SpecialButton
         android:id="@+id/start_btn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
