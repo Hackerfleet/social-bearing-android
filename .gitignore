@@ -15,6 +15,7 @@
 # generated files
 bin/
 gen/
+gen-external-apklibs/
 
 # maven output folder
 target
@@ -47,3 +48,4 @@ Thumbs.db
 # maven eclipse files
 .externalToolBuilders
 maven-eclipse.xml
+
