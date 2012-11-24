@@ -8,7 +8,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
-public class ApplicationController extends Application {
+public class ApplicationController extends Application implements LocationListener{
 
 	private Location last_loc;
 	private LocationManager mLocationManager;
@@ -17,20 +17,7 @@ public class ApplicationController extends Application {
 	public void onCreate() {
 		mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
-		// mainly adding this listener to get first fix fast
-		LocationListener locationListener = new LocationListener() {
-		    public void onLocationChanged(Location location) {
-		    	last_loc=location;
-		    }
-
-		    public void onStatusChanged(String provider, int status, Bundle extras) {}
-
-		    public void onProviderEnabled(String provider) {}
-
-		    public void onProviderDisabled(String provider) {}
-		  };
-
-		mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+		mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		
 		super.onCreate();
 	}
@@ -42,4 +29,14 @@ public class ApplicationController extends Application {
 	public LocationManager getLocationManager() {
 		return mLocationManager;
 	}
+
+  public void onLocationChanged(Location location) {
+    last_loc=location;
+  }
+
+  public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+  public void onProviderEnabled(String provider) {}
+
+  public void onProviderDisabled(String provider) {}
 }
