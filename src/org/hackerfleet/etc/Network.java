@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -12,6 +13,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.hackerfleet.ApplicationController;
 import org.hackerfleet.model.Buoy;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,8 +52,8 @@ public class Network {
         HttpPost request = new HttpPost(AppDefs.POST_URL);
         try {
           JSONObject requestObject = new JSONObject();
-          requestObject.put("device_uuid", "your mom");
-          requestObject.put("device_model", "guess what");
+          requestObject.put("device_uuid", ApplicationController.getInstance().getUuid());
+          requestObject.put("device_model", Build.MODEL);
 
           JSONArray jsonArray = new JSONArray();
           for (Buoy buoy : buoys) {
