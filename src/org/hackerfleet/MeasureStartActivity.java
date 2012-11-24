@@ -6,6 +6,7 @@ import org.holoeverywhere.widget.Button;
 import org.holoeverywhere.widget.TextView;
 
 import android.content.Intent;
+import android.location.GpsSatellite;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -19,7 +20,8 @@ public class MeasureStartActivity extends Activity implements LocationListener {
   private TextView              sat_tv;
   private ApplicationController ac;
   private Button                startButton;
-
+  private TextView				accuracy_tv;
+  
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.measure_start);
@@ -36,22 +38,38 @@ public class MeasureStartActivity extends Activity implements LocationListener {
 
     buoy = getIntent().getExtras().getInt("buoy");
     sat_tv = (TextView) findViewById(R.id.sat_count);
+    accuracy_tv = (TextView) findViewById(R.id.accuracy_count);
     if (ac.getLastLocation() == null)
-      sat_tv.setText("NO GPS");
+    	sat_tv.setText("NO GPS");
     else
-      sat_tv.setText(""+ac.getLastLocation().getAccuracy()+"m");
+    	onLocationChanged(ac.getLastLocation());
+      
+	ac.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		
-		ac.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-		
-		ImageView bouy_icon=(ImageView)findViewById(R.id.buoy_icon);
-		bouy_icon.setImageResource(AppDefs.foo.get(buoy).image_resId);
-		super.onCreate(savedInstanceState);
+	ImageView bouy_icon=(ImageView)findViewById(R.id.buoy_icon);
+	bouy_icon.setImageResource(AppDefs.foo.get(buoy).image_resId);
+	super.onCreate(savedInstanceState);
 	}
 
 	@Override
 	public void onLocationChanged(Location location) {
-		sat_tv.setText(""+location.getAccuracy()+"m");
-
+		int sat_cnt=0;
+		
+		if (location == null) {
+		    accuracy_tv.setText("NO GPS FIX");
+		} else {
+			accuracy_tv.setText("Accuracy:"+ac.getLastLocation().getAccuracy()+"m");	
+		}
+		
+		Iterable<GpsSatellite> sats=ac.getLocationManager().getGpsStatus(null).getSatellites();
+		
+		for (GpsSatellite sat:sats) {
+			if (sat.usedInFix())
+				sat_cnt++;
+		}
+		
+		sat_tv.setText("Sats:"+sat_cnt);
+		
 	}
 
 	@Override
@@ -65,7 +83,7 @@ public class MeasureStartActivity extends Activity implements LocationListener {
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 		sat_tv.setText(""+ac.getLastLocation().getAccuracy()+"m");
-
+		accuracy_tv.setText(""+ac.getLastLocation().getAccuracy()+"m");
 	}
 
 }
