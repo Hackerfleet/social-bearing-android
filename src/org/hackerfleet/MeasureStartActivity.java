@@ -2,31 +2,44 @@ package org.hackerfleet;
 
 import org.hackerfleet.etc.AppDefs;
 import org.holoeverywhere.app.Activity;
+import org.holoeverywhere.widget.Button;
 import org.holoeverywhere.widget.TextView;
 
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 public class MeasureStartActivity extends Activity implements LocationListener {
 
-	private Integer buoy;
-	private TextView sat_tv;
-	private ApplicationController ac;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		setContentView (R.layout.measure_start);
-		ac=(ApplicationController)this.getApplicationContext();
-		
-		buoy=getIntent().getExtras().getInt("buoy");
-		sat_tv=(TextView)findViewById(R.id.sat_count);
-		if (ac.getLastLocation()==null)
-			sat_tv.setText("NO GPS");
-		else
-			sat_tv.setText(""+ac.getLastLocation().getAccuracy()+"m");
+  private Integer               buoy;
+  private TextView              sat_tv;
+  private ApplicationController ac;
+  private Button                startButton;
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    setContentView(R.layout.measure_start);
+    ac = (ApplicationController) this.getApplicationContext();
+
+    startButton = (Button) findViewById(R.id.start_btn);
+
+    startButton.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View view) {
+        Intent startSimpleForm = new Intent(MeasureStartActivity.this, SimpleDataEntryActivity.class);
+        startActivity(startSimpleForm);
+      }
+    });
+
+    buoy = getIntent().getExtras().getInt("buoy");
+    sat_tv = (TextView) findViewById(R.id.sat_count);
+    if (ac.getLastLocation() == null)
+      sat_tv.setText("NO GPS");
+    else
+      sat_tv.setText(""+ac.getLastLocation().getAccuracy()+"m");
 		
 		ac.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		
