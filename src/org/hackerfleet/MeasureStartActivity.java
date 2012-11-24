@@ -42,7 +42,7 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
 	ac.getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		
 	ImageView bouy_icon=(ImageView)findViewById(R.id.buoy_icon);
-	bouy_icon.setImageResource(AppDefs.foo.get(buoy).image_resId);
+	bouy_icon.setImageResource(AppDefs.buoyDefinitions.get(buoy).image_resId);
 	super.onCreate(savedInstanceState);
 	}
 
@@ -67,11 +67,6 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
 		
 	}
 
-  @Override
-  public void onLocationChanged(Location location) {
-    sat_tv.setText("" + location.getAccuracy() + "m");
-
-  }
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -79,10 +74,13 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
 		accuracy_tv.setText(""+ac.getLastLocation().getAccuracy()+"m");
 	}
 
-  @Override
-  public void onStatusChanged(String provider, int status, Bundle extras) {
-    sat_tv.setText("" + ac.getLastLocation().getAccuracy() + "m");
+  @Override public void onProviderEnabled(String s) {
   }
+
+  @Override public void onProviderDisabled(String s) {
+  }
+
+
 
   @Override
   public void onClick(View view) {
