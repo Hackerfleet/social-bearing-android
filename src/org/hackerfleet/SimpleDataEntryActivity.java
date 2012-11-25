@@ -167,15 +167,15 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
         if (bearings.size() > ENOUGH_BEARINGS) {
           showDialog(ENOUGH_BEARINGS);
         } else {
-          createAndAddBearing();
-          Toast.makeText(this, R.string.bearing_added, Toast.LENGTH_SHORT).show();
-          Intent resultIntent = new Intent();
-          resultIntent.putExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS, bearings);
+          if (createAndAddBearing()) {
+            Toast.makeText(this, R.string.bearing_added, Toast.LENGTH_SHORT).show();
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS, bearings);
 
-          setResult(MeasureStartActivity.RESULT_OK, resultIntent);
-          finish();
+            setResult(MeasureStartActivity.RESULT_OK, resultIntent);
+            finish();
           }
-
+        }
         return true;
       }
       case R.id.menu_done: {
@@ -230,23 +230,25 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
 
 
   private void uploadBearing() {
-    try {
-      createAndAddBearing();
+    if (createAndAddBearing()) {
+      try {
 
-      int numBearings = bearings.size();
-      String toastText = getResources().getQuantityString(R.plurals.bearings_sent, numBearings, numBearings);
-      Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show();
+        int numBearings = bearings.size();
+        String toastText = getResources().getQuantityString(R.plurals.bearings_sent, numBearings, numBearings);
+        Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show();
 
-      Buoy buoy = new Buoy(AppDefs.buoyDefinitions.get(R.id.north_btn), null, bearings);
-      Log.d(AppDefs.TAG, buoy.toJSON().toString());
-      Network.upload(this, buoy);
-    } catch (IOException ioe) {
+        Buoy buoy = new Buoy(AppDefs.buoyDefinitions.get(R.id.north_btn), null, bearings);
+        Log.d(AppDefs.TAG, buoy.toJSON().toString());
+        Network.upload(this, buoy);
+      } catch (IOException ioe) {
 
-      Log.e(AppDefs.TAG, "Error while uploading", ioe);
-    } catch (JSONException jsonE) {
+        Log.e(AppDefs.TAG, "Error while uploading", ioe);
+      } catch (JSONException jsonE) {
 
-      Log.e(AppDefs.TAG, "Error while uploading", jsonE);
+        Log.e(AppDefs.TAG, "Error while uploading", jsonE);
+      }
+      finish();
     }
-    finish();
+
   }
 }
