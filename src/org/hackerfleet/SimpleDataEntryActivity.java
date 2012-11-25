@@ -68,7 +68,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     ac = (ApplicationController) this.getApplicationContext();
     bearings = new ArrayList<Bearing>();
     setContentView(R.layout.simple_data_entry);
-    getSupportActionBar().setTitle("Corellian Engineering Corporation");
+    getSupportActionBar().setTitle(R.string.app_name);
 
     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -113,16 +113,9 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
 //      uuid.setText(ac.getUuid().toString());
     }
 
-    if (bearings != null && bearings.size() == 1) {
-      getSupportActionBar().setSubtitle(bearings.size() + " Bearing collected");
-    }
-    if (bearings != null && bearings.size() > 1) {
-      getSupportActionBar().setSubtitle(bearings.size() + " Bearings collected");
-    }
-    if (bearings == null || bearings.size() == 0) {
-      getSupportActionBar().setSubtitle("0 Bearings collected");
-    }
-
+    int numBearings = (bearings == null) ? 0 : bearings.size();
+    String subtitle = getResources().getQuantityString(R.plurals.bearings_collected, numBearings, numBearings);
+    getSupportActionBar().setSubtitle(subtitle);
   }
 
   @Override
@@ -240,6 +233,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
         Buoy buoy = new Buoy(AppDefs.buoyDefinitions.get(R.id.north_btn), null, bearings);
         Log.d(AppDefs.TAG, buoy.toJSON().toString());
         Network.upload(this, buoy);
+
       } catch (IOException ioe) {
 
         Log.e(AppDefs.TAG, "Error while uploading", ioe);
@@ -247,6 +241,10 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
 
         Log.e(AppDefs.TAG, "Error while uploading", jsonE);
       }
+      Intent resultIntent = new Intent();
+      resultIntent.putExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS, new ArrayList<Bearing>());
+      setResult(MeasureStartActivity.RESULT_OK, resultIntent);
+
       finish();
     }
 
