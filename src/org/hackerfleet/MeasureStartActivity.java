@@ -5,7 +5,8 @@ import java.util.Iterator;
 
 import org.hackerfleet.etc.AppDefs;
 import org.hackerfleet.model.Bearing;
-import org.holoeverywhere.app.Activity;
+
+import com.actionbarsherlock.app.SherlockActivity;
 
 import android.content.Intent;
 import android.location.GpsSatellite;
@@ -19,7 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MeasureStartActivity extends Activity implements LocationListener, GpsStatus.Listener, View.OnClickListener {
+public class MeasureStartActivity extends SherlockActivity implements LocationListener, GpsStatus.Listener, View.OnClickListener {
 
   public static final  String EXTRA_KEY_BEARINGS = "bearings";
   private static final int    REQUEST_BEARINGS   = 1337;
@@ -75,11 +76,16 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
     ac.enableLocationUpdates();
 
     if (bearings != null && bearings.size() == 1) {
-      getActionBar().setSubtitle(bearings.size() + " Bearing collected");
+      getSupportActionBar().setSubtitle(bearings.size() + " Bearing collected");
     }
     if (bearings != null && bearings.size() > 1) {
-      getActionBar().setSubtitle(bearings.size() + " Bearings collected");
+      getSupportActionBar().setSubtitle(bearings.size() + " Bearings collected");
     }
+    if (bearings == null || bearings.size() == 0) {
+      getSupportActionBar().setSubtitle("0 Bearings collected");
+    }
+    Log.d(TAG, "Display bearings: " + bearings);
+
   }
 
   @Override
@@ -121,6 +127,10 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
         bearings = data.getParcelableArrayListExtra(EXTRA_KEY_BEARINGS);
 
         Log.d(TAG, "bearings: " + bearings);
+      } else {
+        bearings = new ArrayList<Bearing>();
+        Log.d(TAG, "reset bearings: " + bearings);
+
       }
     }
 

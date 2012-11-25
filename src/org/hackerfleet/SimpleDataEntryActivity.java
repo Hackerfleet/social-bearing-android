@@ -1,5 +1,24 @@
 package org.hackerfleet;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import org.apache.http.StatusLine;
+import org.hackerfleet.etc.AppDefs;
+import org.hackerfleet.etc.Network;
+import org.hackerfleet.model.Bearing;
+import org.hackerfleet.model.Buoy;
+import org.holoeverywhere.widget.Toast;
+import org.json.JSONException;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -11,23 +30,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.EditText;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import org.apache.http.StatusLine;
-import org.hackerfleet.etc.AppDefs;
-import org.hackerfleet.etc.Network;
-import org.hackerfleet.model.Bearing;
-import org.hackerfleet.model.Buoy;
-import org.holoeverywhere.widget.Toast;
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * @author flashmop
@@ -45,7 +47,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   EditText lon;
   EditText acc;
   EditText timestamp;
-  EditText uuid;
+//  EditText uuid;
   EditText angle;
   EditText buoyType;
 
@@ -78,7 +80,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     buoyType = (EditText) findViewById(R.id.buoy_type);
     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-    uuid = (EditText) findViewById(R.id.uuid);
+//    uuid = (EditText) findViewById(R.id.uuid);
   }
 
   @Override
@@ -107,7 +109,17 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
       int second = calendar.get(Calendar.SECOND);
       timestamp.setText(String.format("%02d:%02d:%02d", hour, minute, second));
 
-      uuid.setText(ac.getUuid().toString());
+//      uuid.setText(ac.getUuid().toString());
+    }
+
+    if (bearings != null && bearings.size() == 1) {
+      getSupportActionBar().setSubtitle(bearings.size() + " Bearing collected");
+    }
+    if (bearings != null && bearings.size() > 1) {
+      getSupportActionBar().setSubtitle(bearings.size() + " Bearings collected");
+    }
+    if (bearings == null || bearings.size() == 0) {
+      getSupportActionBar().setSubtitle("0 Bearings collected");
     }
 
   }
@@ -154,13 +166,16 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
         if (bearings.size() > ENOUGH_BEARINGS) {
           showDialog(ENOUGH_BEARINGS);
         } else {
-          createAndAddBearing();
-          Toast.makeText(this, "Bearing added", Toast.LENGTH_SHORT).show();
-          Intent resultIntent = new Intent();
+          if (createAndAddBearing()) {
+
+
+            Toast.makeText(this, "Bearing added", Toast.LENGTH_SHORT).show();
+            Intent resultIntent = new Intent();
           resultIntent.putExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS, bearings);
 
           setResult(MeasureStartActivity.RESULT_OK, resultIntent);
           finish();
+          }
         }
         return true;
       case R.id.menu_done:
@@ -189,15 +204,27 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     // #ted methods use File | Settings | File Templates.
   }
 
-  private void createAndAddBearing() {
+  private boolean createAndAddBearing() {
+    int bearingAngle;
+    try {
 
-    int bearingAngle = validateAngle(angle.getText().toString());
-    Bearing bearing
-        = new Bearing(lastLocation, bearingAngle);
-    bearings.add(bearing);
+      bearingAngle = validateAngle(angle.getText().toString());
+
+      Bearing bearing = new Bearing(lastLocation, bearingAngle);
+      bearings.add(bearing);
+      return true;
+
+    } catch (NumberFormatException e) {
+
+      Toast.makeText(this, "Please enter valid angle (0-359)", android.widget.Toast.LENGTH_LONG).show();
+      return false;
+    }
+
+
   }
 
   private int validateAngle(String s) {
+
     return Integer.valueOf(s);
   }
 
