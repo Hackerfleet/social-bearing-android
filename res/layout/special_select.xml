@@ -91,6 +91,7 @@
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:background="@drawable/button"
+            android:visibility="invisible"
           />
         
         
