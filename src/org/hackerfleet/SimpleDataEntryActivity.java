@@ -11,6 +11,7 @@ import org.hackerfleet.etc.AppDefs;
 import org.hackerfleet.etc.Network;
 import org.hackerfleet.model.Bearing;
 import org.hackerfleet.model.Buoy;
+
 import org.holoeverywhere.widget.Toast;
 import org.json.JSONException;
 
@@ -30,6 +31,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * @author flashmop
@@ -43,13 +45,13 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
 
   private ApplicationController ac;
   LocationManager locationManager;
-  EditText lat;
-  EditText lon;
-  EditText acc;
-  EditText timestamp;
-//  EditText uuid;
+  TextView lat;
+  TextView lon;
+  TextView acc;
+  TextView timestamp;
+
   EditText angle;
-  EditText buoyType;
+  TextView buoyType;
 
   private Location lastLocation;
   private ArrayList<Bearing> bearings;
@@ -72,12 +74,12 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
 
     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-    lat = (EditText) findViewById(R.id.gps_lat);
-    lon = (EditText) findViewById(R.id.gps_lon);
-    acc = (EditText) findViewById(R.id.gps_acc);
-    timestamp = (EditText) findViewById(R.id.timestamp);
+    lat = (TextView) findViewById(R.id.gps_lat);
+    lon = (TextView) findViewById(R.id.gps_lon);
+    acc = (TextView) findViewById(R.id.gps_acc);
+    timestamp = (TextView) findViewById(R.id.timestamp);
     angle = (EditText) findViewById(R.id.angle);
-    buoyType = (EditText) findViewById(R.id.buoy_type);
+    buoyType = (TextView) findViewById(R.id.buoy_type);
     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
 //    uuid = (EditText) findViewById(R.id.uuid);
