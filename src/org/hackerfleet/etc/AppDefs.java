@@ -29,7 +29,7 @@ public class AppDefs {
     put(R.id.specialpp_fateral, new BuoyDefinition(R.drawable.specialpp_fateral, "specialpp_fateral"));
     put(R.id.specialpp_lateral, new BuoyDefinition(R.drawable.specialpp_lateral, "specialpp_lateral"));
     put(R.id.specialpp_prefered_starbord, new BuoyDefinition(R.drawable.specialpp_starboard_prefered, "specialpp_prefered_starbord"));
-    //put(R.id.spe, new BuoyDefinition(R.drawable.specialpp_port_prefered, "specialpp_prefered_port"));
+    put(R.id.specialpp_prefered_port, new BuoyDefinition(R.drawable.specialpp_port_prefered, "specialpp_port_prefered"));
 
     
     //specialpp_forbidden

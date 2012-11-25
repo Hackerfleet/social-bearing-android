@@ -39,14 +39,7 @@
             android:background="@drawable/button"
           />
 
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" >
-
-        <ImageButton
+            <ImageButton
             android:id="@+id/specialpp_fateral"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -55,6 +48,14 @@
             android:background="@drawable/button"
           />
         
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+            
 
         <ImageButton
             android:id="@+id/specialpp_lateral"
@@ -74,6 +75,25 @@
             android:background="@drawable/button"
           />
 
+        <ImageButton
+            android:id="@+id/specialpp_prefered_port"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="@drawable/button"
+          />
+        
+        <ImageButton
+            android:id="@+id/specialpp_prefered_starbord"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="@drawable/button"
+          />
+        
+        
     </LinearLayout>
     
        

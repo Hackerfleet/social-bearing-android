@@ -13,7 +13,7 @@ public class SpecialBuoySelectFragment extends BaseBuoySelectFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v=inflater.inflate(R.layout.special_select);
-		btn2buoy(v,new int[] {R.id.specialpp_conical,R.id.specialpp_fateral,R.id.specialpp_forbidden,R.id.specialpp_lateral});
+		btn2buoy(v,new int[] {R.id.specialpp_conical,R.id.specialpp_fateral,R.id.specialpp_forbidden,R.id.specialpp_lateral,R.id.specialpp_prefered_port,R.id.specialpp_prefered_starbord,R.id.specialpp_safe_water});
 		return v;
 	}
 }
