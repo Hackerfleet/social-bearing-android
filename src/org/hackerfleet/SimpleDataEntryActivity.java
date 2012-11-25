@@ -106,7 +106,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   protected void onStart() {
     super.onStart();
 
-    bearings = (ArrayList) getIntent().getParcelableArrayListExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS);
+    bearings = getIntent().getParcelableArrayListExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS);
     int buoyExtra = getIntent().getIntExtra(AppDefs.EXTRA_BUOY, 0);
     buoyType.setText(AppDefs.buoyDefinitions.get(buoyExtra).tag);
     if (bearings == null) {

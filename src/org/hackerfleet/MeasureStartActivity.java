@@ -99,7 +99,7 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
     if (requestCode == REQUEST_BEARINGS) {
       if (resultCode == RESULT_OK) {
 
-        bearings = (ArrayList) data.getParcelableArrayListExtra(EXTRA_KEY_BEARINGS);
+        bearings = data.getParcelableArrayListExtra(EXTRA_KEY_BEARINGS);
 
         Log.d(TAG, "bearings: " + bearings);
       }
