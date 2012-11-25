@@ -25,7 +25,7 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
   private static final int    REQUEST_BEARINGS   = 1337;
   private static final String TAG                = MeasureStartActivity.class.getSimpleName();
   private Integer buoy;
-  private TextView satellitesTextView, accuracyTextView;
+  private TextView satellitesTextView, accuracyTextView, bearingCount;
   private ApplicationController ac;
   private Button             startButton;
   private ArrayList<Bearing> bearings;
@@ -34,6 +34,7 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
   protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.measure_start);
     ac = (ApplicationController) this.getApplicationContext();
+
 
     startButton = (Button) findViewById(R.id.start_btn);
     
@@ -56,6 +57,8 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
 
     ImageView buoyIcon = (ImageView) findViewById(R.id.buoy_icon);
     buoyIcon.setImageResource(AppDefs.buoyDefinitions.get(buoy).image_resId);
+
+    bearingCount = (TextView) findViewById(R.id.bearing_count);
     super.onCreate(savedInstanceState);
 
   }
@@ -70,6 +73,13 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
   protected void onResume() {
     super.onResume();
     ac.enableLocationUpdates();
+
+    if (bearings != null && bearings.size() == 1) {
+      getActionBar().setSubtitle(bearings.size() + " Bearing collected");
+    }
+    if (bearings != null && bearings.size() > 1) {
+      getActionBar().setSubtitle(bearings.size() + " Bearings collected");
+    }
   }
 
   @Override
