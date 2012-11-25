@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-    >
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/gps_lat"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:hint="Latitude"
+            android:editable="false" />
+
+        <EditText
+            android:id="@+id/gps_lon"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:hint="Longitude"
+            android:editable="false" />
+
+        <EditText
+            android:id="@+id/gps_acc"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:hint="Accuracy"
+            android:editable="false" />
+    </LinearLayout>
 
     <EditText
-        android:id="@+id/gps_lat"
+        android:id="@+id/timestamp"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:hint="Latitude"
+        android:layout_width="fill_parent"
+        android:hint="Timestamp"
         android:editable="false" />
 
-      <EditText
-          android:id="@+id/gps_lon"
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:hint="Longitude"
-          android:editable="false" />
-
-      <EditText
-          android:id="@+id/gps_acc"
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:hint="Accuracy"
-          android:editable="false" />
-  </LinearLayout>
-
-  <EditText
-      android:id="@+id/timestamp"
-      android:layout_height="wrap_content"
-      android:layout_width="fill_parent"
-      android:hint="Timestamp"
-      android:editable="false" />
+    <EditText
+        android:id="@+id/buoy_type"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:hint="Bouy Type"
+        android:editable="false" />
 
     <EditText
         android:id="@+id/angle"
@@ -52,19 +58,6 @@
 
     </EditText>
 
-    <EditText
-        android:id="@+id/buoy_type"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:hint="Bouy Type"
-        android:editable="false" />
-
-    <EditText
-        android:id="@+id/uuid"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:hint="UUID"
-        android:editable="false" />
 
 </LinearLayout>
 

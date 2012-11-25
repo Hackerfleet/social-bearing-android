@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">socialbearing</string>
   <string name="satellites">Satellites: </string>
   <string name="accuracy">Accuracy: </string>
@@ -8,4 +8,13 @@
   <string name="buoy_select">Buoy-Select</string>
   <string name="enough_bearings">Enough Bearings</string>
   <string name="enough_bearings_message">You already have enough bearings for this bouy. Press ok to upload them to the server.</string>
+  <string name="location_accuracy_format"><xliff:g id="accuracy">%s</xliff:g> m</string>
+  <string name="bearing_added">Bearing added</string>
+  <plurals name="bearings_sent">
+    <item quantity="one">1 bearing sent.</item>
+    <item quantity="other"><xliff:g id="number_of_bearings">%d</xliff:g> bearings sent.</item>
+  </plurals>
+  <string name="no_gps">No GPS</string>
+  <string name="start_button_label">Start</string>
+  <string name="no_server_response">No server response, sorry.</string>
 </resources>

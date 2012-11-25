@@ -13,6 +13,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.hackerfleet.ApplicationController;
+import org.hackerfleet.R;
 import org.hackerfleet.model.Buoy;
 import org.holoeverywhere.widget.Toast;
 import org.json.JSONArray;
@@ -109,7 +110,7 @@ public class Network {
               listener.onResult(responseValue.toString());
             }
           } else {
-            Toast.makeText(ApplicationController.getInstance(), "No server response, sorry.", Toast.LENGTH_LONG).show();
+            Toast.makeText(ApplicationController.getInstance(), R.string.no_server_response, Toast.LENGTH_LONG).show();
           }
         } catch (IOException ioe) {
           Log.e(AppDefs.TAG, "It's kaputt!", ioe);
