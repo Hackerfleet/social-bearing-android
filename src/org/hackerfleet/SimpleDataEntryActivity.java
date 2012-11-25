@@ -133,6 +133,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_add:
+        //TODO add exit condition of 10 bearings
         createAndAddBearing();
         Toast.makeText(this, "Bearing added", Toast.LENGTH_SHORT).show();
 //        SimpleDataEntryActivity.start(this, bearings);
