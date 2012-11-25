@@ -99,7 +99,8 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
 
       lat.setText("" + String.format(Locale.getDefault(), "%.4f", lastLocation.getLatitude()));
       lon.setText("" + String.format(Locale.getDefault(), "%.4f", lastLocation.getLongitude()));
-      acc.setText(String.format(Locale.getDefault(), "%.1f", lastLocation.getAccuracy()) + "m");
+      String accuracyString = String.format("%.1f", lastLocation.getAccuracy());
+      acc.setText(String.format(getString(R.string.location_accuracy_format), accuracyString));
 
       Date locationDate = new Date(lastLocation.getTime());
       Calendar calendar = Calendar.getInstance();
@@ -166,11 +167,9 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
         if (bearings.size() > ENOUGH_BEARINGS) {
           showDialog(ENOUGH_BEARINGS);
         } else {
-          if (createAndAddBearing()) {
-
-
-            Toast.makeText(this, "Bearing added", Toast.LENGTH_SHORT).show();
-            Intent resultIntent = new Intent();
+          createAndAddBearing();
+          Toast.makeText(this, R.string.bearing_added, Toast.LENGTH_SHORT).show();
+          Intent resultIntent = new Intent();
           resultIntent.putExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS, bearings);
 
           setResult(MeasureStartActivity.RESULT_OK, resultIntent);
@@ -232,7 +231,11 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   private void uploadBearing() {
     try {
       createAndAddBearing();
-      Toast.makeText(this, bearings.size() + " Bearings send.", Toast.LENGTH_SHORT).show();
+
+      int numBearings = bearings.size();
+      String toastText = getResources().getQuantityString(R.plurals.bearings_sent, numBearings, numBearings);
+      Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show();
+
       Buoy buoy = new Buoy(AppDefs.buoyDefinitions.get(R.id.north_btn), null, bearings);
       Log.d(AppDefs.TAG, buoy.toJSON().toString());
       Network.upload(this, buoy);

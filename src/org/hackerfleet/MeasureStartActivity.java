@@ -38,20 +38,21 @@ public class MeasureStartActivity extends SherlockActivity implements LocationLi
 
 
     startButton = (Button) findViewById(R.id.start_btn);
-    
+
     startButton.setOnClickListener(this);
     startButton.setEnabled(false);
-    
+
     ac.getLocationManager().addGpsStatusListener(this);
 
     buoy = getIntent().getExtras().getInt("buoy");
     satellitesTextView = (TextView) findViewById(R.id.sat_count);
     accuracyTextView = (TextView) findViewById(R.id.accuracy);
     if (ac.getLastLocation() == null) {
-      satellitesTextView.setText("NO GPS");
+      satellitesTextView.setText(getString(R.string.no_gps));
     } else {
-      accuracyTextView.setText(ac.getLastLocation().getAccuracy() + "m");
+      displayAccuracy(ac.getLastLocation());
     }
+
     accuracyTextView = (TextView) findViewById(R.id.accuracy);
 
     ac.addLocationListener(this);
@@ -90,8 +91,7 @@ public class MeasureStartActivity extends SherlockActivity implements LocationLi
 
   @Override
   public void onLocationChanged(Location location) {
-    accuracyTextView.setText("" + location.getAccuracy() + "m");
-
+    displayAccuracy(location);
   }
 
   @Override
@@ -104,7 +104,7 @@ public class MeasureStartActivity extends SherlockActivity implements LocationLi
 
   @Override
   public void onStatusChanged(String provider, int status, Bundle extras) {
-    accuracyTextView.setText("" + ac.getLastLocation().getAccuracy() + "m");
+    displayAccuracy(ac.getLastLocation());
   }
 
   @Override
@@ -149,17 +149,22 @@ public class MeasureStartActivity extends SherlockActivity implements LocationLi
         }
         if (i > 0)
           satellitesTextView.setText(String.format("%d", i));
-        
+
         if (ac.getLastLocation()==null || (ac.getLastLocation().getAccuracy()>AppDefs.MIN_ACCURACY)) {
         	startButton.setEnabled(false);
         	startButton.setText("");
         } else {
         	startButton.setEnabled(true);
-        	startButton.setText("Start");
+        	startButton.setText(getString(R.string.start_button_label));
         }
         break;
       default:
         break;
     }
+  }
+
+  private void displayAccuracy(Location location) {
+    String accuracyFormat = getString(R.string.location_accuracy_format);
+    accuracyTextView.setText(String.format(accuracyFormat, location.getAccuracy()));
   }
 }
