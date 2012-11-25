@@ -79,8 +79,12 @@ public class Network {
       @Override
       protected void onPostExecute(HttpResponse response) {
 
-        if (listener != null)
-          listener.onResponse(response.getStatusLine());
+        if (listener != null) {
+          if (response != null)
+            listener.onResponse(response.getStatusLine());
+          else
+            listener.onResponse(null);
+        }
         try {
           BufferedReader reader = new BufferedReader(new InputStreamReader(
               response.getEntity().getContent()));

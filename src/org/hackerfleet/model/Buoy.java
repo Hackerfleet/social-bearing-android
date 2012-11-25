@@ -2,8 +2,6 @@ package org.hackerfleet.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
-import org.hackerfleet.etc.AppDefs;
 import org.hackerfleet.etc.BuoyDefinition;
 import org.json.JSONArray;
 import org.json.JSONException;
