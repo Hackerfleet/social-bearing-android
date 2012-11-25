@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">socialbearing</string>
+  <string name="app_name">Social Bearing BETA</string>
   <string name="satellites">Satellites</string>
   <string name="accuracy">Accuracy</string>
   <string name="add">Done</string>
