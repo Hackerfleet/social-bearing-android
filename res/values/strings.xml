@@ -10,4 +10,9 @@
   <string name="enough_bearings_message">You already have enough bearings for this bouy. Press ok to upload them to the server.</string>
 
   <string name="location_accuracy_format"><xliff:g id="accuracy">%s</xliff:g> m</string>
+  <string name="bearing_added">Bearing added</string>
+  <plurals name="bearings_sent">
+    <item quantity="one">1 bearing sent.</item>
+    <item quantity="other"><xliff:g id="number_of_bearings">%d</xliff:g> bearings sent.</item>
+  </plurals>
 </resources>

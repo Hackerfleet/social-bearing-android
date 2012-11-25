@@ -156,7 +156,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
           showDialog(ENOUGH_BEARINGS);
         } else {
           createAndAddBearing();
-          Toast.makeText(this, "Bearing added", Toast.LENGTH_SHORT).show();
+          Toast.makeText(this, R.string.bearing_added, Toast.LENGTH_SHORT).show();
           Intent resultIntent = new Intent();
           resultIntent.putExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS, bearings);
 
@@ -206,7 +206,11 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   private void uploadBearing() {
     try {
       createAndAddBearing();
-      Toast.makeText(this, bearings.size() + " Bearings send.", Toast.LENGTH_SHORT).show();
+
+      int numBearings = bearings.size();
+      String toastText = getResources().getQuantityString(R.plurals.bearings_sent, numBearings, numBearings);
+      Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show();
+
       Buoy buoy = new Buoy(AppDefs.buoyDefinitions.get(R.id.north_btn), null, bearings);
       Log.d(AppDefs.TAG, buoy.toJSON().toString());
       Network.upload(this, buoy);
