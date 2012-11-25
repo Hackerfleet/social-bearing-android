@@ -97,7 +97,8 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
 
       lat.setText("" + String.format(Locale.getDefault(), "%.4f", lastLocation.getLatitude()));
       lon.setText("" + String.format(Locale.getDefault(), "%.4f", lastLocation.getLongitude()));
-      acc.setText(String.format(Locale.getDefault(), "%.1f", lastLocation.getAccuracy()) + "m");
+      String accuracyString = String.format("%.1f", lastLocation.getAccuracy());
+      acc.setText(String.format(getString(R.string.location_accuracy_format), accuracyString));
 
       Date locationDate = new Date(lastLocation.getTime());
       Calendar calendar = Calendar.getInstance();
