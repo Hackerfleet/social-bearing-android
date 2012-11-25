@@ -190,9 +190,15 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   }
 
   private void createAndAddBearing() {
+
+    int bearingAngle = validateAngle(angle.getText().toString());
     Bearing bearing
-        = new Bearing(lastLocation);
+        = new Bearing(lastLocation, bearingAngle);
     bearings.add(bearing);
+  }
+
+  private int validateAngle(String s) {
+    return Integer.valueOf(s);
   }
 
 
