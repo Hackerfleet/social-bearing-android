@@ -16,4 +16,5 @@
   </plurals>
   <string name="no_gps">No GPS</string>
   <string name="start_button_label">Start</string>
+  <string name="no_server_response">No server response, sorry.</string>
 </resources>
