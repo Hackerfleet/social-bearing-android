@@ -45,6 +45,10 @@
         android:hint="Bouy Type"
         android:editable="false" />
 
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:background="@drawable/button"
+        >
     <EditText
         android:id="@+id/angle"
         android:layout_height="wrap_content"
@@ -57,7 +61,7 @@
         <requestFocus />
 
     </EditText>
-
+</LinearLayout>
 
 </LinearLayout>
 

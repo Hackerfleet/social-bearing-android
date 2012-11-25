@@ -53,8 +53,6 @@ public class MeasureStartActivity extends SherlockActivity implements LocationLi
       displayAccuracy(ac.getLastLocation());
     }
 
-    accuracyTextView = (TextView) findViewById(R.id.accuracy);
-
     ac.addLocationListener(this);
 
     ImageView buoyIcon = (ImageView) findViewById(R.id.buoy_icon);
