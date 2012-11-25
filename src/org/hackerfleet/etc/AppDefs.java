@@ -11,11 +11,11 @@ import android.util.SparseArray;
  */
 public class AppDefs {
   public final static String TAG = "SOCIALBEARING";
-  public final static String BASE_URL = "http://192.168.2.180";
+  public final static String BASE_URL = "http://192.168.2.239";
 //  public final static String BASE_URL = "http://192.168.2.181";
   public final static String POST_URL = BASE_URL.concat("/v1/bearing");
   public final static String EXTRA_BUOY = "buoy";
-  public final static int MIN_ACCURACY=50; // in m
+  public final static int MIN_ACCURACY=30; // in m
   
   public final static SparseArray<BuoyDefinition> buoyDefinitions = new SparseArray<BuoyDefinition>() {{
     put(R.id.north_btn, new BuoyDefinition(R.drawable.spar_north, "north"));
