@@ -50,7 +50,7 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
 
     accuracyTextView = (TextView) findViewById(R.id.accuracy);
 
-//    ac.addLocationListener(this);
+    ac.addLocationListener(this);
 
     ImageView buoyIcon = (ImageView) findViewById(R.id.buoy_icon);
     buoyIcon.setImageResource(AppDefs.buoyDefinitions.get(buoy).image_resId);
@@ -67,7 +67,7 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
   @Override
   protected void onResume() {
     super.onResume();
-    ac.addLocationListener(this);
+    ac.enableLocationUpdates();
   }
 
   @Override
