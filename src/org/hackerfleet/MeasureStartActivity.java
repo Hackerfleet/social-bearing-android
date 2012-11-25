@@ -1,5 +1,12 @@
 package org.hackerfleet;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.hackerfleet.etc.AppDefs;
+import org.hackerfleet.model.Bearing;
+import org.holoeverywhere.app.Activity;
+
 import android.content.Intent;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
@@ -11,12 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import org.hackerfleet.etc.AppDefs;
-import org.hackerfleet.model.Bearing;
-import org.holoeverywhere.app.Activity;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class MeasureStartActivity extends Activity implements LocationListener, GpsStatus.Listener, View.OnClickListener {
 
@@ -49,7 +50,7 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
 
     accuracyTextView = (TextView) findViewById(R.id.accuracy);
 
-    ac.addLocationListener(this);
+//    ac.addLocationListener(this);
 
     ImageView buoyIcon = (ImageView) findViewById(R.id.buoy_icon);
     buoyIcon.setImageResource(AppDefs.buoyDefinitions.get(buoy).image_resId);
@@ -61,6 +62,12 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
   protected void onPause() {
     super.onPause();
     ac.disableLocationUpdates();
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    ac.addLocationListener(this);
   }
 
   @Override

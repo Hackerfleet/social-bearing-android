@@ -1,10 +1,11 @@
 package org.hackerfleet.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class Bearing implements Parcelable {
 
@@ -16,10 +17,12 @@ public class Bearing implements Parcelable {
   private static final String ACCURACY = "accuracy";
 
   private Location location;
+  private int bearing;
   private JSONObject json;
 
-  public Bearing(Location location) {
+  public Bearing(Location location, int bearing) {
     this.location = location;
+    this.bearing = bearing;
   }
 
   public JSONObject toJSON() throws JSONException {
@@ -28,7 +31,7 @@ public class Bearing implements Parcelable {
       json.put(TIMESTAMP, location.getTime());
       json.put(LAT, location.getLatitude());
       json.put(LON, location.getLongitude());
-      json.put(BEARING, location.getBearing());
+      json.put(BEARING, bearing);
       json.put(ACCURACY, location.getAccuracy());
     }
     return json;
@@ -42,6 +45,7 @@ public class Bearing implements Parcelable {
   @Override
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeParcelable(location, flags);
+    dest.writeInt(bearing);
   }
 
   public static final Parcelable.Creator<Bearing> CREATOR
@@ -57,5 +61,6 @@ public class Bearing implements Parcelable {
 
   private Bearing(Parcel in) {
     location = in.readParcelable(ClassLoader.getSystemClassLoader());
+    bearing = in.readInt();
   }
 }
