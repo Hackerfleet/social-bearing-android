@@ -22,6 +22,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -95,8 +96,15 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
       lat.setText("" + String.format(Locale.getDefault(), "%.4f", lastLocation.getLatitude()));
       lon.setText("" + String.format(Locale.getDefault(), "%.4f", lastLocation.getLongitude()));
       acc.setText(String.format(Locale.getDefault(), "%.1f", lastLocation.getAccuracy()) + "m");
+
       Date locationDate = new Date(lastLocation.getTime());
-      timestamp.setText(locationDate.getHours() + ":" + locationDate.getMinutes() + ":" + locationDate.getSeconds());
+      Calendar calendar = Calendar.getInstance();
+      calendar.setTime(locationDate);
+      int hour = calendar.get(Calendar.HOUR_OF_DAY);
+      int minute = calendar.get(Calendar.MINUTE);
+      int second = calendar.get(Calendar.SECOND);
+      timestamp.setText(String.format("%02d:%02d:%02d", hour, minute, second));
+
       uuid.setText(ac.getUuid().toString());
     }
 
