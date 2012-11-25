@@ -68,7 +68,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     ac = (ApplicationController) this.getApplicationContext();
     bearings = new ArrayList<Bearing>();
     setContentView(R.layout.simple_data_entry);
-    getSupportActionBar().setTitle("Corellian Engineering Corporation");
+    getSupportActionBar().setTitle(R.string.app_name);
 
     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
