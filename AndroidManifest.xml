@@ -17,7 +17,8 @@
         android:allowBackup="false" >
         
         <activity android:name=".BearingActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +26,10 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".MeasureStartActivity"/>
-        <activity android:name=".SimpleDataEntryActivity"/>
+        <activity android:name=".MeasureStartActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SimpleDataEntryActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 </manifest>
