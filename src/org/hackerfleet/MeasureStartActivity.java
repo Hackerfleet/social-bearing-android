@@ -26,7 +26,7 @@ public class MeasureStartActivity extends SherlockActivity implements LocationLi
   private static final int    REQUEST_BEARINGS   = 1337;
   private static final String TAG                = MeasureStartActivity.class.getSimpleName();
   private Integer buoy;
-  private TextView satellitesTextView, accuracyTextView, bearingCount;
+  private TextView satellitesTextView, accuracyTextView;
   private ApplicationController ac;
   private Button             startButton;
   private ArrayList<Bearing> bearings;
@@ -58,7 +58,6 @@ public class MeasureStartActivity extends SherlockActivity implements LocationLi
     ImageView buoyIcon = (ImageView) findViewById(R.id.buoy_icon);
     buoyIcon.setImageResource(AppDefs.buoyDefinitions.get(buoy).image_resId);
 
-    bearingCount = (TextView) findViewById(R.id.bearing_count);
     super.onCreate(savedInstanceState);
 
   }

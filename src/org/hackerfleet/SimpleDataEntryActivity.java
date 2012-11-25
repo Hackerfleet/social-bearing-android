@@ -43,7 +43,6 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   private static final String EXTRA_BEARINGS = "bearings";
   private static final int ENOUGH_BEARINGS = 10;
 
-  private ApplicationController ac;
   LocationManager locationManager;
   TextView lat;
   TextView lon;
@@ -67,7 +66,6 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    ac = (ApplicationController) this.getApplicationContext();
     bearings = new ArrayList<Bearing>();
     setContentView(R.layout.simple_data_entry);
     getSupportActionBar().setTitle(R.string.app_name);
