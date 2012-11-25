@@ -173,7 +173,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   public void onResponse(StatusLine statusLine) {
     //TODO define exit condtitions
     if (statusLine != null) {
-      Toast.makeText(this, "response: " + statusLine.getStatusCode(), Toast.LENGTH_SHORT).show();
+      Toast.makeText(this, "response: " + statusLine.getStatusCode() + ": " + statusLine.getReasonPhrase(), Toast.LENGTH_SHORT).show();
     } else {
       Toast.makeText(this, "response: was nullo", Toast.LENGTH_SHORT).show();
     }
@@ -181,7 +181,8 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
 
   @Override
   public void onResult(String result) {
-    //To change body of implemented methods use File | Settings | File Templates.
+    //To change body of implemen
+    // #ted methods use File | Settings | File Templates.
   }
 
   private void createAndAddBearing() {
