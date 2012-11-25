@@ -15,7 +15,8 @@ public class AppDefs {
 //  public final static String BASE_URL = "http://192.168.2.181";
   public final static String POST_URL = BASE_URL.concat("/v1/bearing");
   public final static String EXTRA_BUOY = "buoy";
-
+  public final static int MIN_ACCURACY=50; // in m
+  
   public final static SparseArray<BuoyDefinition> buoyDefinitions = new SparseArray<BuoyDefinition>() {{
     put(R.id.north_btn, new BuoyDefinition(R.drawable.spar_north, "north"));
     put(R.id.south_btn, new BuoyDefinition(R.drawable.spar_south, "south"));
@@ -30,16 +31,6 @@ public class AppDefs {
     put(R.id.specialpp_lateral, new BuoyDefinition(R.drawable.specialpp_lateral, "specialpp_lateral"));
     put(R.id.specialpp_prefered_starbord, new BuoyDefinition(R.drawable.specialpp_starboard_prefered, "specialpp_prefered_starbord"));
     put(R.id.specialpp_prefered_port, new BuoyDefinition(R.drawable.specialpp_port_prefered, "specialpp_port_prefered"));
-
-    
-    //specialpp_forbidden
-    //specialpp_safe water
-    //specialpp_fateral
-    //specialpp_lateral
-    
-    // specialpp_prefered_starbord
-    // specialpp_prefered port
-    
     
   }};
 

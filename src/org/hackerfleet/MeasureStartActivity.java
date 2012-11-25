@@ -20,8 +20,8 @@ import java.util.Iterator;
 
 public class MeasureStartActivity extends Activity implements LocationListener, GpsStatus.Listener, View.OnClickListener {
 
-  private static final int    REQUEST_BEARINGS   = 1337;
   public static final  String EXTRA_KEY_BEARINGS = "bearings";
+  private static final int    REQUEST_BEARINGS   = 1337;
   private static final String TAG                = MeasureStartActivity.class.getSimpleName();
   private Integer buoy;
   private TextView satellitesTextView, accuracyTextView;
