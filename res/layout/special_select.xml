@@ -2,100 +2,85 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    
     android:columnCount="4"
     android:orientation="vertical" >
 
-    
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" >
-
-        <ImageButton
-            android:id="@+id/specialpp_conical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:background="@drawable/button"
-         />
-
-        <ImageButton
-            android:id="@+id/specialpp_forbidden"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:background="@drawable/button"
-          />
-
-        <ImageButton
-            android:id="@+id/specialpp_safe_water"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:background="@drawable/button"
-          />
-
-            <ImageButton
-            android:id="@+id/specialpp_fateral"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:background="@drawable/button"
-          />
-        
-    </LinearLayout>
-    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" >
-
-            
 
         <ImageButton
             android:id="@+id/specialpp_lateral"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
             android:background="@drawable/button"
-          />
+            android:scaleType="fitCenter" />
+
+        <ImageButton
+            android:id="@+id/specialpp_fateral"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button"
+            android:scaleType="fitCenter" />
+
+        <ImageButton
+            android:id="@+id/specialpp_safe_water"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button"
+            android:scaleType="fitCenter" />
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button"
+            android:scaleType="fitCenter"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        
+        
+        <ImageButton
+            android:id="@+id/specialpp_conical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button"
+            android:scaleType="fitCenter" />
 
         <ImageButton
             android:id="@+id/specialpp_prefered_starbord"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
             android:background="@drawable/button"
-          />
-
+            android:scaleType="fitCenter" />
+        
         <ImageButton
             android:id="@+id/specialpp_prefered_port"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
             android:background="@drawable/button"
-          />
-        
+            android:scaleType="fitCenter" />
+
         <ImageButton
-            android:id="@+id/specialpp_prefered_starbord"
+            android:id="@+id/specialpp_forbidden"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
             android:background="@drawable/button"
-            android:visibility="invisible"
-          />
-        
-        
+            android:scaleType="fitCenter" />
     </LinearLayout>
-    
-       
+
 </LinearLayout>

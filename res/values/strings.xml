@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">socialbearing</string>
-  <string name="satellites">Satellites</string>
-  <string name="accuracy">Accuracy</string>
+  <string name="satellites">Satellites: </string>
+  <string name="accuracy">Accuracy: </string>
   <string name="add">Done</string>
   <string name="done">Add</string>
   <string name="buoy_select">Buoy-Select</string>
