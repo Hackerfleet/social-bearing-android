@@ -240,6 +240,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
         Buoy buoy = new Buoy(AppDefs.buoyDefinitions.get(R.id.north_btn), null, bearings);
         Log.d(AppDefs.TAG, buoy.toJSON().toString());
         Network.upload(this, buoy);
+
       } catch (IOException ioe) {
 
         Log.e(AppDefs.TAG, "Error while uploading", ioe);
@@ -247,6 +248,10 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
 
         Log.e(AppDefs.TAG, "Error while uploading", jsonE);
       }
+      Intent resultIntent = new Intent();
+      resultIntent.putExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS, new ArrayList<Bearing>());
+      setResult(MeasureStartActivity.RESULT_OK, resultIntent);
+
       finish();
     }
 

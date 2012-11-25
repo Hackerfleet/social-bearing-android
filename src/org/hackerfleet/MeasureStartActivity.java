@@ -127,9 +127,9 @@ public class MeasureStartActivity extends SherlockActivity implements LocationLi
         bearings = data.getParcelableArrayListExtra(EXTRA_KEY_BEARINGS);
 
         Log.d(TAG, "bearings: " + bearings);
-      } else {
-        bearings = new ArrayList<Bearing>();
-        Log.d(TAG, "reset bearings: " + bearings);
+//      } else {
+//        bearings = new ArrayList<Bearing>();
+//        Log.d(TAG, "reset bearings: " + bearings);
 
       }
     }
