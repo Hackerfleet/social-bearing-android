@@ -5,54 +5,59 @@
               android:orientation="vertical">
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:background="@drawable/gps_info_background" >
 
+        <LinearLayout
+        	android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+         	android:layout_alignParentLeft="true"
+         	android:orientation="vertical"
+         	>
+         	
         <TextView android:id="@+id/satellites_label"
                   android:text="@string/satellites"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_alignParentLeft="true"
+             
                   android:textStyle="bold"/>
 
         <TextView android:id="@+id/sat_count"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_centerVertical="true"
-                  android:layout_below="@id/satellites_label"/>
+                  />
 
         <TextView android:id="@+id/accuracy_label"
                   android:text="@string/accuracy"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_centerHorizontal="true"
                   android:textStyle="bold"/>
 
         <TextView android:id="@+id/accuracy"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_below="@id/accuracy_label"
-                  android:layout_centerHorizontal="true"/>
+            />
 
-
+		</LinearLayout>
         <ImageView
                 android:id="@+id/buoy_icon"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:padding="7dp"
                 android:src="@drawable/spar_east"
                 android:layout_alignParentRight="true"/>
-
+        
     </RelativeLayout>
 
     <org.hackerfleet.widgets.SquareButton
-        android:padding="7dp"
+        android:layout_margin="7dp"
         android:textColor="#FFFFFF"
         android:textSize="42sp"
         android:id="@+id/start_btn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Start" 
         android:background="@drawable/start_button"
         />
 </LinearLayout>

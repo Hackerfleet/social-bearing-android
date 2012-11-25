@@ -36,8 +36,10 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
     ac = (ApplicationController) this.getApplicationContext();
 
     startButton = (Button) findViewById(R.id.start_btn);
-
+    
     startButton.setOnClickListener(this);
+    startButton.setEnabled(false);
+    
     ac.getLocationManager().addGpsStatusListener(this);
 
     buoy = getIntent().getExtras().getInt("buoy");
@@ -127,6 +129,14 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
         }
         if (i > 0)
           satellitesTextView.setText(String.format("%d", i));
+        
+        if (ac.getLastLocation()==null || (ac.getLastLocation().getAccuracy()>AppDefs.MIN_ACCURACY)) {
+        	startButton.setEnabled(false);
+        	startButton.setText("");
+        } else {
+        	startButton.setEnabled(true);
+        	startButton.setText("Start");
+        }
         break;
       default:
         break;
