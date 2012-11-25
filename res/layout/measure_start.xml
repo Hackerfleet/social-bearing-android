@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,58 +11,80 @@
         android:background="@drawable/gps_info_background" >
 
         <LinearLayout
-        	android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-         	android:layout_alignParentLeft="true"
-         	android:orientation="vertical"
-         	>
-         	
-        <TextView android:id="@+id/satellites_label"
-                  android:text="@string/satellites"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-             
-                  android:textStyle="bold"/>
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:orientation="horizontal" >
 
-        <TextView android:id="@+id/sat_count"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-        <TextView android:id="@+id/accuracy_label"
-                  android:text="@string/accuracy"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/satellites_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/satellites"
+                    android:textColor="#114B7F"
+                    android:textSize="16sp" 
+                    android:gravity="right"
+                    />
 
-        <TextView android:id="@+id/accuracy"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-            />
+                <TextView
+                    android:id="@+id/accuracy_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/accuracy"
+                    android:textColor="#114B7F"
+                    android:textSize="16sp"
+                    android:gravity="right" />
+            </LinearLayout>
 
-		</LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="7dp" >
+
+                <TextView
+                    android:id="@+id/accuracy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#114B7F"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sat_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#114B7F"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
         <ImageView
-                android:id="@+id/buoy_icon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:padding="7dp"
-                android:src="@drawable/spar_east"
-                android:layout_alignParentRight="true"/>
-        
+            android:id="@+id/buoy_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentRight="true"
+            android:padding="7dp"
+            android:src="@drawable/spar_east" />
     </RelativeLayout>
 
     <org.hackerfleet.widgets.SquareButton
-        android:layout_margin="7dp"
-        android:textColor="#FFFFFF"
-        android:textSize="42sp"
         android:id="@+id/start_btn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="7dp"
         android:background="@drawable/start_button"
-        />
 
+        android:textColor="#FFFFFF"
+        android:textSize="42sp" />
     <TextView android:id="@+id/bearing_count"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                />
+
 </LinearLayout>
