@@ -136,6 +136,21 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater inflater = this.getSupportMenuInflater();
     inflater.inflate(R.menu.measure_menu, menu);
+
+    if (bearings == null || bearings.size() < 2) {
+      menu.findItem(R.id.menu_done).setVisible(false);
+      menu.findItem(R.id.menu_add).setVisible(true);
+    }
+
+    if (bearings != null && bearings.size() >= 1) {
+      menu.findItem(R.id.menu_done).setVisible(true);
+      menu.findItem(R.id.menu_add).setVisible(true);
+    }
+
+    if (bearings != null && bearings.size() >= ENOUGH_BEARINGS) {
+      menu.findItem(R.id.menu_done).setVisible(true);
+      menu.findItem(R.id.menu_add).setVisible(false);
+    }
     return true;
   }
 
