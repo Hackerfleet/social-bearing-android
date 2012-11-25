@@ -8,12 +8,15 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
+        android:tag="heading_buoy_select"
     />
     
 	<fragment android:name="org.hackerfleet.buoy_select.SpecialBuoySelectFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
+        android:tag="special_buoy_select"
+
     />
 
 </LinearLayout>
