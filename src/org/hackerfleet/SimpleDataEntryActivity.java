@@ -1,23 +1,5 @@
 package org.hackerfleet;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
-import org.apache.http.StatusLine;
-import org.hackerfleet.etc.AppDefs;
-import org.hackerfleet.etc.Network;
-import org.hackerfleet.model.Bearing;
-import org.hackerfleet.model.Buoy;
-import org.holoeverywhere.widget.Toast;
-import org.json.JSONException;
-
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -26,6 +8,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.EditText;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+import org.apache.http.StatusLine;
+import org.hackerfleet.etc.AppDefs;
+import org.hackerfleet.etc.Network;
+import org.hackerfleet.model.Bearing;
+import org.hackerfleet.model.Buoy;
+import org.holoeverywhere.widget.Toast;
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * @author flashmop
@@ -44,6 +42,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   EditText timestamp;
   EditText uuid;
   EditText angle;
+  EditText buoyType;
 
   private Location lastLocation;
   private ArrayList<Bearing> bearings;
@@ -71,6 +70,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     acc = (EditText) findViewById(R.id.gps_acc);
     timestamp = (EditText) findViewById(R.id.timestamp);
     angle = (EditText) findViewById(R.id.angle);
+    buoyType = (EditText) findViewById(R.id.buoy_type);
     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 //    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 //    imm.showSoftInput(angle, InputMethodManager.SHOW_IMPLICIT);
@@ -107,6 +107,8 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     super.onStart();
 
     bearings = (ArrayList) getIntent().getParcelableArrayListExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS);
+    int buoyExtra = getIntent().getIntExtra(AppDefs.EXTRA_BUOY, 0);
+    buoyType.setText(AppDefs.buoyDefinitions.get(buoyExtra).tag);
     if (bearings == null) {
       bearings = new ArrayList<Bearing>();
     }
@@ -162,7 +164,11 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   @Override
   public void onResponse(StatusLine statusLine) {
     //TODO define exit condtitions
-    Toast.makeText(this, "response: " + statusLine.getStatusCode(), Toast.LENGTH_SHORT).show();
+    if (statusLine != null) {
+      Toast.makeText(this, "response: " + statusLine.getStatusCode(), Toast.LENGTH_SHORT).show();
+    } else {
+      Toast.makeText(this, "response: was nullo", Toast.LENGTH_SHORT).show();
+    }
   }
 
   @Override
