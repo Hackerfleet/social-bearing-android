@@ -1,11 +1,10 @@
 package org.hackerfleet.etc;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.util.Log;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
@@ -15,16 +14,21 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.hackerfleet.ApplicationController;
 import org.hackerfleet.model.Buoy;
+import org.holoeverywhere.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.util.Log;
 
 public class Network {
+
+  private static final String TAG = Network.class.getSimpleName();
 
   public interface ResultListener {
     public void onResponse(StatusLine statusLine);
@@ -80,19 +84,32 @@ public class Network {
       protected void onPostExecute(HttpResponse response) {
 
         if (listener != null) {
-          if (response != null)
+
+          if (response != null) {
+
+            Log.d(TAG, "response.toString(): " + response.getStatusLine().getReasonPhrase());
             listener.onResponse(response.getStatusLine());
-          else
+
+          } else {
+
             listener.onResponse(null);
+          }
         }
         try {
-          BufferedReader reader = new BufferedReader(new InputStreamReader(
+
+          if (response != null && response.getEntity() != null) {
+
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
               response.getEntity().getContent()));
-          String line = "";
-          StringBuilder responseValue = new StringBuilder();
-          while ((line = reader.readLine()) != null) {
-            responseValue.append(line);
-            listener.onResult(responseValue.toString());
+            String line = "";
+            StringBuilder responseValue = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+              responseValue.append(line);
+              listener.onResult(responseValue.toString());
+            }
+          } else {
+            Toast.makeText(ApplicationController.getInstance(), "No server response, sorry.", Toast.LENGTH_LONG).show();
           }
         } catch (IOException ioe) {
           Log.e(AppDefs.TAG, "It's kaputt!", ioe);
