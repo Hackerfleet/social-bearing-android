@@ -76,15 +76,10 @@ public class MeasureStartActivity extends SherlockActivity implements LocationLi
     super.onResume();
     ac.enableLocationUpdates();
 
-    if (bearings != null && bearings.size() == 1) {
-      getSupportActionBar().setSubtitle(bearings.size() + " Bearing collected");
-    }
-    if (bearings != null && bearings.size() > 1) {
-      getSupportActionBar().setSubtitle(bearings.size() + " Bearings collected");
-    }
-    if (bearings == null || bearings.size() == 0) {
-      getSupportActionBar().setSubtitle("0 Bearings collected");
-    }
+    int numBearings = (bearings == null) ? 0 : bearings.size();
+    String subtitle = getResources().getQuantityString(R.plurals.bearings_collected, numBearings, numBearings);
+    getSupportActionBar().setSubtitle(subtitle);
+
     Log.d(TAG, "Display bearings: " + bearings);
 
   }
