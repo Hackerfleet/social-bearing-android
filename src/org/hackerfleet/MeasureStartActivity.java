@@ -43,11 +43,11 @@ public class MeasureStartActivity extends Activity implements LocationListener, 
     buoy = getIntent().getExtras().getInt("buoy");
     satellitesTextView = (TextView) findViewById(R.id.sat_count);
     accuracyTextView = (TextView) findViewById(R.id.accuracy);
-    if (ac.getLastLocation() == null)
+    if (ac.getLastLocation() == null) {
       satellitesTextView.setText("NO GPS");
-    else
+    } else {
       accuracyTextView.setText(ac.getLastLocation().getAccuracy() + "m");
-
+    }
     accuracyTextView = (TextView) findViewById(R.id.accuracy);
 
     ac.addLocationListener(this);
