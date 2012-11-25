@@ -1,6 +1,9 @@
 package org.hackerfleet;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
@@ -34,6 +37,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   private final static String TAG = SimpleDataEntryActivity.class.getSimpleName();
 
   private static final String EXTRA_BEARINGS = "bearings";
+  private static final int ENOUGH_BEARINGS = 10;
 
   private ApplicationController ac;
   LocationManager locationManager;
@@ -73,8 +77,6 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     angle = (EditText) findViewById(R.id.angle);
     buoyType = (EditText) findViewById(R.id.buoy_type);
     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-//    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//    imm.showSoftInput(angle, InputMethodManager.SHOW_IMPLICIT);
 
     uuid = (EditText) findViewById(R.id.uuid);
   }
@@ -130,36 +132,39 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   }
 
   @Override
+  protected Dialog onCreateDialog(int id, Bundle args) {
+    switch (id) {
+      case ENOUGH_BEARINGS:
+        return new AlertDialog.Builder(SimpleDataEntryActivity.this).setTitle(R.string.enough_bearings).setMessage(R.string.enough_bearings_message).setPositiveButton(android.R.string.ok
+            , new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            uploadBearing();
+          }
+        }).create();
+      default:
+        return super.onCreateDialog(id, args);
+    }
+  }
+
+  @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_add:
-        createAndAddBearing();
-        Toast.makeText(this, "Bearing added", Toast.LENGTH_SHORT).show();
-//        SimpleDataEntryActivity.start(this, bearings);
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS, bearings);
+        if (bearings.size() > ENOUGH_BEARINGS) {
+          showDialog(ENOUGH_BEARINGS);
+        } else {
+          createAndAddBearing();
+          Toast.makeText(this, "Bearing added", Toast.LENGTH_SHORT).show();
+          Intent resultIntent = new Intent();
+          resultIntent.putExtra(MeasureStartActivity.EXTRA_KEY_BEARINGS, bearings);
 
-        setResult(MeasureStartActivity.RESULT_OK, resultIntent);
-        finish();
+          setResult(MeasureStartActivity.RESULT_OK, resultIntent);
+          finish();
+        }
         return true;
       case R.id.menu_done:
-        try {
-          createAndAddBearing();
-          Toast.makeText(this, bearings.size() + " Bearings send.", Toast.LENGTH_SHORT).show();
-
-          Buoy buoy = new Buoy(AppDefs.buoyDefinitions.get(R.id.north_btn), null, bearings);
-          Log.d(AppDefs.TAG, buoy.toJSON().toString());
-          Network.upload(this, buoy);
-
-        } catch (IOException ioe) {
-
-          Log.e(AppDefs.TAG, "Error while uploading", ioe);
-        } catch (JSONException jsonE) {
-
-          Log.e(AppDefs.TAG, "Error while uploading", jsonE);
-        }
-        finish(); //?
-
+        uploadBearing();
         return true;
 
       default:
@@ -167,7 +172,6 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     }
 
   }
-
 
   @Override
   public void onResponse(StatusLine statusLine) {
@@ -188,5 +192,23 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
     Bearing bearing
         = new Bearing(lastLocation);
     bearings.add(bearing);
+  }
+
+
+  private void uploadBearing() {
+    try {
+      createAndAddBearing();
+      Toast.makeText(this, bearings.size() + " Bearings send.", Toast.LENGTH_SHORT).show();
+      Buoy buoy = new Buoy(AppDefs.buoyDefinitions.get(R.id.north_btn), null, bearings);
+      Log.d(AppDefs.TAG, buoy.toJSON().toString());
+      Network.upload(this, buoy);
+    } catch (IOException ioe) {
+
+      Log.e(AppDefs.TAG, "Error while uploading", ioe);
+    } catch (JSONException jsonE) {
+
+      Log.e(AppDefs.TAG, "Error while uploading", jsonE);
+    }
+    finish();
   }
 }

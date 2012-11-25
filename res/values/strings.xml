@@ -6,4 +6,6 @@
   <string name="add">Done</string>
   <string name="done">Add</string>
   <string name="buoy_select">Buoy-Select</string>
+  <string name="enough_bearings">Enough Bearings</string>
+  <string name="enough_bearings_message">You already have enough bearings for this bouy. Press ok to upload them to the server.</string>
 </resources>
