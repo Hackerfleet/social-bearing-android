@@ -1,14 +1,13 @@
-package org.hackerfleet;
+package org.hackerfleet.widgets;
 
 import org.holoeverywhere.widget.Button;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 
-public class SpecialButton extends Button {
+public class SquareButton extends Button {
 
-	public SpecialButton(Context context, AttributeSet attrs) {
+	public SquareButton(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 	
@@ -22,14 +21,5 @@ public class SpecialButton extends Button {
 	    int size = Math.min(parentWidth, parentHeight);
 	    this.setMeasuredDimension(size,size);
 	}
-
-/*
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		this.setBackgroundResource(R.drawable.start_btn_press);
-		return super.onTouchEvent(event);
-	}
-	
-*/	
 
 }
