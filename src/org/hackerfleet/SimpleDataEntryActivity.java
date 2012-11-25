@@ -163,7 +163,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.menu_add:
+      case R.id.menu_add: {
         if (bearings.size() > ENOUGH_BEARINGS) {
           showDialog(ENOUGH_BEARINGS);
         } else {
@@ -175,16 +175,17 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
           setResult(MeasureStartActivity.RESULT_OK, resultIntent);
           finish();
           }
-        }
+
         return true;
-      case R.id.menu_done:
+      }
+      case R.id.menu_done: {
         uploadBearing();
         return true;
-
-      default:
+      }
+      default: {
         return super.onOptionsItemSelected(item);
+      }
     }
-
   }
 
   @Override
