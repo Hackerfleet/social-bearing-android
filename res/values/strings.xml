@@ -14,6 +14,10 @@
     <item quantity="one">1 bearing sent.</item>
     <item quantity="other"><xliff:g id="number_of_bearings">%d</xliff:g> bearings sent.</item>
   </plurals>
+  <plurals name="bearings_collected">
+    <item quantity="one">1 bearing collected</item>
+    <item quantity="other"><xliff:g id="number_of_bearings">%d</xliff:g> bearings collected</item>
+  </plurals>
   <string name="no_gps">No GPS</string>
   <string name="start_button_label">Start</string>
   <string name="no_server_response">No server response, sorry.</string>
