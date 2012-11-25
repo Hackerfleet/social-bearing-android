@@ -209,7 +209,7 @@ public class SimpleDataEntryActivity extends SherlockActivity implements Network
 
     } catch (NumberFormatException e) {
 
-      Toast.makeText(this, "Please enter valid angle (0-359)", android.widget.Toast.LENGTH_LONG).show();
+      Toast.makeText(this, R.string.enter_valid_angle, android.widget.Toast.LENGTH_LONG).show();
       return false;
     }
 
