@@ -28,6 +28,8 @@ import android.util.Log;
 
 public class Network {
 
+  private static final String TAG = Network.class.getSimpleName();
+
   public interface ResultListener {
     public void onResponse(StatusLine statusLine);
 
@@ -82,10 +84,16 @@ public class Network {
       protected void onPostExecute(HttpResponse response) {
 
         if (listener != null) {
-          if (response != null)
+
+          if (response != null) {
+
+            Log.d(TAG, "response.toString(): " + response.getStatusLine().getReasonPhrase());
             listener.onResponse(response.getStatusLine());
-          else
+
+          } else {
+
             listener.onResponse(null);
+          }
         }
         try {
 
