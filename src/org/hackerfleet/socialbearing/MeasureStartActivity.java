@@ -1,10 +1,10 @@
-package org.hackerfleet;
+package org.hackerfleet.socialbearing;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.hackerfleet.etc.AppDefs;
-import org.hackerfleet.model.Bearing;
+import org.hackerfleet.socialbearing.etc.AppDefs;
+import org.hackerfleet.socialbearing.model.Bearing;
 
 import com.actionbarsherlock.app.SherlockActivity;
 

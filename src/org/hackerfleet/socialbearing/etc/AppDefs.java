@@ -1,6 +1,6 @@
-package org.hackerfleet.etc;
+package org.hackerfleet.socialbearing.etc;
 
-import org.hackerfleet.R;
+import org.hackerfleet.socialbearing.R;
 
 import android.util.SparseArray;
 
@@ -16,14 +16,14 @@ public class AppDefs {
   public final static String POST_URL = BASE_URL.concat("/v1/bearing");
   public final static String EXTRA_BUOY = "buoy";
   public final static int MIN_ACCURACY=30; // in m
-  
+
   public final static SparseArray<BuoyDefinition> buoyDefinitions = new SparseArray<BuoyDefinition>() {{
     put(R.id.north_btn, new BuoyDefinition(R.drawable.spar_north, "north"));
     put(R.id.south_btn, new BuoyDefinition(R.drawable.spar_south, "south"));
     put(R.id.east_btn, new BuoyDefinition(R.drawable.spar_east, "east"));
     put(R.id.west_btn, new BuoyDefinition(R.drawable.spar_west, "west"));
     put(R.id.center_btn, new BuoyDefinition(R.drawable.pillar_single, "center"));
-    
+
     put(R.id.specialpp_conical, new BuoyDefinition(R.drawable.specialpp_conical, "specialpp_conical"));
     put(R.id.specialpp_forbidden, new BuoyDefinition(R.drawable.specialpp_forbidden, "specialpp_forbidden"));
     put(R.id.specialpp_safe_water, new BuoyDefinition(R.drawable.specialpp_safe_water, "specialpp_safe_water"));
@@ -31,7 +31,7 @@ public class AppDefs {
     put(R.id.specialpp_lateral, new BuoyDefinition(R.drawable.specialpp_lateral, "specialpp_lateral"));
     put(R.id.specialpp_prefered_starbord, new BuoyDefinition(R.drawable.specialpp_starboard_prefered, "specialpp_prefered_starbord"));
     put(R.id.specialpp_prefered_port, new BuoyDefinition(R.drawable.specialpp_port_prefered, "specialpp_port_prefered"));
-    
+
   }};
 
 }

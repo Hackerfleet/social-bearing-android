@@ -1,8 +1,9 @@
-package org.hackerfleet.model;
+package org.hackerfleet.socialbearing.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import org.hackerfleet.etc.BuoyDefinition;
+
+import org.hackerfleet.socialbearing.etc.BuoyDefinition;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

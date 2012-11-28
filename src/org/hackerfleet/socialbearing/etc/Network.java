@@ -1,4 +1,4 @@
-package org.hackerfleet.etc;
+package org.hackerfleet.socialbearing.etc;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,9 +12,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.hackerfleet.ApplicationController;
-import org.hackerfleet.R;
-import org.hackerfleet.model.Buoy;
+import org.hackerfleet.socialbearing.R;
+import org.hackerfleet.socialbearing.ApplicationController;
+import org.hackerfleet.socialbearing.model.Buoy;
 import org.holoeverywhere.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;

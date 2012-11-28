@@ -1,4 +1,4 @@
-package org.hackerfleet.widgets;
+package org.hackerfleet.socialbearing.widgets;
 
 import org.holoeverywhere.widget.Button;
 

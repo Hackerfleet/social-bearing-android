@@ -1,4 +1,4 @@
-package org.hackerfleet;
+package org.hackerfleet.socialbearing;
 import org.holoeverywhere.app.Activity;
 
 import android.os.Bundle;

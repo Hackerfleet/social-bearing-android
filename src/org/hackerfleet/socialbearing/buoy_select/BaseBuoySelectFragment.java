@@ -1,6 +1,6 @@
-package org.hackerfleet.buoy_select;
+package org.hackerfleet.socialbearing.buoy_select;
 
-import org.hackerfleet.etc.AppDefs;
+import org.hackerfleet.socialbearing.etc.AppDefs;
 import org.holoeverywhere.app.Fragment;
 
 import android.view.View;

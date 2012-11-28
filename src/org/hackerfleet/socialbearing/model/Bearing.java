@@ -1,4 +1,4 @@
-package org.hackerfleet.model;
+package org.hackerfleet.socialbearing.model;
 
 import org.json.JSONException;
 import org.json.JSONObject;

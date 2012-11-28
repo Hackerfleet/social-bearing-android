@@ -1,4 +1,4 @@
-package org.hackerfleet;
+package org.hackerfleet.socialbearing;
 
 import android.content.Context;
 import android.location.Location;

@@ -1,4 +1,4 @@
-package org.hackerfleet.widgets;
+package org.hackerfleet.socialbearing.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;

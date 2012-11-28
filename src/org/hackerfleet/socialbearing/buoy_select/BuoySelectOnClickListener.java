@@ -1,7 +1,7 @@
-package org.hackerfleet.buoy_select;
+package org.hackerfleet.socialbearing.buoy_select;
 
-import org.hackerfleet.MeasureStartActivity;
-import org.hackerfleet.etc.AppDefs;
+import org.hackerfleet.socialbearing.MeasureStartActivity;
+import org.hackerfleet.socialbearing.etc.AppDefs;
 
 import android.content.Intent;
 import android.util.Log;

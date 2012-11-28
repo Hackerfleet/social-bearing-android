@@ -1,4 +1,4 @@
-package org.hackerfleet;
+package org.hackerfleet.socialbearing;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,10 +7,10 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.apache.http.StatusLine;
-import org.hackerfleet.etc.AppDefs;
-import org.hackerfleet.etc.Network;
-import org.hackerfleet.model.Bearing;
-import org.hackerfleet.model.Buoy;
+import org.hackerfleet.socialbearing.etc.AppDefs;
+import org.hackerfleet.socialbearing.etc.Network;
+import org.hackerfleet.socialbearing.model.Bearing;
+import org.hackerfleet.socialbearing.model.Buoy;
 
 import org.holoeverywhere.widget.Toast;
 import org.json.JSONException;

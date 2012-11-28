@@ -4,14 +4,14 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <fragment android:name="org.hackerfleet.buoy_select.HeadingBuoySelectFragment"
+    <fragment android:name="org.hackerfleet.socialbearing.buoy_select.HeadingBuoySelectFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:tag="heading_buoy_select"
     />
-    
-	<fragment android:name="org.hackerfleet.buoy_select.SpecialBuoySelectFragment"
+
+	<fragment android:name="org.hackerfleet.socialbearing.buoy_select.SpecialBuoySelectFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"

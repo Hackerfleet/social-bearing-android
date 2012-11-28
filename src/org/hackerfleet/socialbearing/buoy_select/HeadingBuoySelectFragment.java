@@ -1,6 +1,6 @@
-package org.hackerfleet.buoy_select;
+package org.hackerfleet.socialbearing.buoy_select;
 
-import org.hackerfleet.R;
+import org.hackerfleet.socialbearing.R;
 import org.holoeverywhere.LayoutInflater;
 
 import android.os.Bundle;

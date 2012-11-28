@@ -20,7 +20,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" 
+                android:orientation="vertical"
                 android:paddingLeft="12dp">
 
                 <TextView
@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/satellites"
                     android:textColor="#114B7F"
-                    android:textSize="16sp" 
+                    android:textSize="16sp"
                     android:gravity="right"
                     />
 
@@ -49,14 +49,14 @@
                 android:orientation="vertical"
                 android:paddingLeft="12dp" >
 
-                
+
                 <TextView
                     android:id="@+id/sat_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#114B7F"
                     android:textStyle="bold" />
-                
+
                 <TextView
                     android:id="@+id/accuracy"
                     android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
             android:src="@drawable/spar_east" />
     </RelativeLayout>
 
-    <org.hackerfleet.widgets.SquareButton
+    <org.hackerfleet.socialbearing.widgets.SquareButton
         android:id="@+id/start_btn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

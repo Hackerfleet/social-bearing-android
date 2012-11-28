@@ -1,4 +1,4 @@
-package org.hackerfleet.etc;
+package org.hackerfleet.socialbearing.etc;
 
 public class BuoyDefinition {
 	public int image_resId;
